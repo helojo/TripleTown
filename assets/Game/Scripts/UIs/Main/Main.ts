@@ -18,7 +18,7 @@ export default class Main extends cc.Component {
     // onLoad () {}
 
     start () {
-
+        
     }
 
     startGame(event:cc.Event, params:String){
