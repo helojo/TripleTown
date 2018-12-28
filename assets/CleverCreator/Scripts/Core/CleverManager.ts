@@ -1,4 +1,4 @@
-import * as Collections from 'typescript-collections';
+import { Dictionary } from 'typescript-collections';
 import BaseManager from "./BaseManager";
 import UIManager from "../UI/UIManager";
 
@@ -18,9 +18,9 @@ export default class CleverManager{
     protected managerMap:Dictionary<String, BaseManager> = new Dictionary<String, BaseManager>();
 
     private constructor(){
-        // console.info("CleverManager.Name.", CleverManager.name);
+        console.info("CleverManager.Name.", CleverManager.name);
         //添加UIManager
-        // this.managerMap.setValue(UIManager.name, new UIManager());
+        this.managerMap.setValue(UIManager.name, new UIManager());
         
     }
 
