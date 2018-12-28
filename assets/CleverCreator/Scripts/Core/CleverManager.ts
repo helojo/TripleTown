@@ -1,4 +1,3 @@
-import { Dictionary } from "typescript-collections";
 import BaseManager from "./BaseManager";
 import UIManager from "../UI/UIManager";
 
@@ -15,13 +14,14 @@ export default class CleverManager{
         return CleverManager.instance;
     }
 
-    protected managerMap:Dictionary<String, BaseManager> = new Dictionary<String, BaseManager>();
+    // protected managerMap:Dictionary<String, BaseManager> = new Dictionary<String, BaseManager>();
 
     private constructor(){
-        console.info("CleverManager.Name.", CleverManager.name);
-        
+        // console.info("CleverManager.Name.", CleverManager.name);
         //添加UIManager
-        this.managerMap.setValue(UIManager.name, new UIManager());
+        // this.managerMap.setValue(UIManager.name, new UIManager());
+
+        
     }
 
     /**
@@ -29,6 +29,6 @@ export default class CleverManager{
      * @param name 名字
      */
     public getManager(name:String){
-        return this.managerMap.getValue(name);
+        // return this.managerMap.getValue(name);
     }
 }
