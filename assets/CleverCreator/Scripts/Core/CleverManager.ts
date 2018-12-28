@@ -1,6 +1,6 @@
 import { Dictionary } from 'typescript-collections';
-import BaseManager from "./BaseManager";
 import UIManager from "../UI/UIManager";
+import BaseManager from "./BaseManager";
 
 export default class CleverManager{
     protected static instance:CleverManager = null;
