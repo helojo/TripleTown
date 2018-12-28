@@ -13,7 +13,7 @@ import CleverManager from "./CleverManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CleverComponent extends cc.Component {
+export default class Clever extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
