@@ -1,3 +1,5 @@
+import Cell from "./Cell";
+import DataView from "./DataView";
 
 /**
  * 地砖数据
@@ -22,8 +24,7 @@ export class TileData {
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Tile extends cc.Component {
-
+export default class Tile extends DataView<TileData> {
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
@@ -31,6 +32,5 @@ export default class Tile extends cc.Component {
     start () {
 
     }
-
-    // update (dt) {}
+    
 }

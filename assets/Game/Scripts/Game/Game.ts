@@ -19,7 +19,7 @@ export default class Game extends cc.Component {
     public static Side:number = 80;
 
     @property({
-        type:Floor,
+        type:cc.Component,
         tooltip:"地板"
     })
     /**
