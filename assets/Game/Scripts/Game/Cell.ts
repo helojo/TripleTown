@@ -1,6 +1,6 @@
 const {ccclass, property} = cc._decorator;
 
-export class CellData {
+export class DCell {
     
 }
 

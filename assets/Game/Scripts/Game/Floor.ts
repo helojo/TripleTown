@@ -1,31 +1,27 @@
-import Tile, { TileData } from "./Tile";
 import Game from "./Game";
 import DataView from "./DataView";
+import DContainer from "./Data/Container";
+import DGrid from "./Data/Grid";
+import Tile, { DTile } from "./Tile";
 
 /**
  * 地板数据
  */
-export class FloorData {
+export class DFloor extends DContainer {
     /**
-     * 宽度
+     * 地板网格
      */
-    public width:number;
+    public grid:DGrid<DTile>;
 
-    /**
-     * 高度
-     */
-    public height:number;
-
-    /**
-     * 网格数据
-     */
-    public grid:TileData[][];
+    public constructor(){
+        super(DFloor.name);
+    }
 }
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Floor extends DataView<FloorData> {
+export default class Floor extends DataView<DFloor> {
 
     @property({
         type:cc.Prefab,
@@ -56,10 +52,9 @@ export default class Floor extends DataView<FloorData> {
      * 更新尺寸
      */
     private updateSize(){
-        let width = this.data.width;
-        let height = this.data.height;
-        this.node.width = width * Game.Side;
-        this.node.height = height * Game.Side;
+        let grid = this.data.grid;
+        this.node.width = grid.Width * Game.Side;
+        this.node.height = grid.Height * Game.Side;
         this.node.anchorX = 0;
         this.node.anchorY = 0;
         this.node.position.x = -this.node.width / 2;
@@ -70,13 +65,10 @@ export default class Floor extends DataView<FloorData> {
      * 更新网格
      */
     private updateGrid(){
-        let width = this.data.width;
-        let height = this.data.height;
         let grid = this.data.grid;
-        cc.log("Floor.UpdateGrid");
-        for (let x = 0; x < width; x++) {
-            for (let y = 0; y < height; y++) {
-                const tile = grid[x][y];
+        for (let x = 0; x < grid.Width; x++) {
+            for (let y = 0; y < grid.Height; y++) {
+                const tile = grid.Grid[x][y];
                 let tileNode = cc.instantiate(this.TilePrefab);
                 tileNode.setPosition(x * Game.Side, y * Game.Side);
                 this.node.addChild(tileNode);
@@ -91,10 +83,9 @@ export default class Floor extends DataView<FloorData> {
      */
     private clearGrid():Array<Array<Tile>>{
         if (this.tileGrid) {
-            let width = this.data.width;
-            let height = this.data.height;
-            for (let x = 0; x < width; x++) {
-                for (let y = 0; y < height; y++) {
+            let grid = this.data.grid;
+            for (let x = 0; x < grid.Width; x++) {
+                for (let y = 0; y < grid.Height; y++) {
                     const tile = this.tileGrid[x][y];
                     if (tile) {
                         tile.node.removeFromParent(true);

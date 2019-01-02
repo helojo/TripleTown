@@ -1,5 +1,5 @@
 import DataView from "./DataView";
-import { CellData } from "./Cell";
+import { DCell } from "./Cell";
 
 export class MapData {
     /**
@@ -15,7 +15,7 @@ export class MapData {
     /**
      * 网格数据
      */
-    public grid:CellData[][];
+    public grid:DCell[][];
 }
 
 const {ccclass, property} = cc._decorator;

@@ -1,3 +1,5 @@
+import { DProperty } from "./Container";
+
 export enum ETier {
     Floor,
     Cell
@@ -6,19 +8,42 @@ export enum ETier {
 /**
  * 位置数据
  */
-export default class DPosition {
+export default class DPosition extends DProperty {
+    protected x:number;
+    protected y:number;
+    protected tier:ETier;
+
     /**
      * 横坐标
      */
-    public x:number;
+    public get X(){
+        return this.x;
+    }
 
     /**
      * 纵坐标
      */
-    public y:number;
+    public get Y(){
+        return this.y;
+    }
 
     /**
      * 层级
      */
-    public tier:ETier;
+    public get Tier(){
+        return this.tier;
+    }
+
+    /**
+     * 层级
+     */
+    public set Tier(tier:ETier){
+        this.tier = tier;
+    }
+
+    public constructor(x:number, y:number){
+        super(DPosition.name);
+        this.x = x;
+        this.y = y;
+    }
 }

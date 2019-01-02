@@ -1,11 +1,19 @@
-import Floor, { FloorData } from "./Floor";
-import { TileData } from "./Tile";
+import DContainer from "./Data/Container";
+import Floor, { DFloor } from "./Floor";
+import DGrid from "./Data/Grid";
+import { DTile } from "./Tile";
+import DPosition from "./Data/Position";
+import DExist from "./Data/Exist";
 
-export class LevelData {
+export class DLevel extends DContainer {
     /**
      * 地板数据
      */
-    public floor:FloorData;
+    public floor:DFloor;
+
+    public constructor(){
+        super(DLevel.name);
+    }
 }
 
 const {ccclass, property} = cc._decorator;
@@ -30,7 +38,7 @@ export default class Game extends cc.Component {
     /**
      * 关卡数据
      */
-    private data:LevelData;
+    private data:DLevel;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -38,32 +46,31 @@ export default class Game extends cc.Component {
         let width = 9;
         let height = 9;
 
-        let level = new LevelData();
+        let level = new DLevel();
 
-        let floor = new FloorData();
-        floor.width = width;
-        floor.height = height;
-        let floorGrid = new Array<Array<TileData>>();
-        for (let x = 0; x < width; x++) {
-            let floorRow = new Array<TileData>();
-            for (let y = 0; y < height; y++) {
-                let floor = new TileData();
-                floor.x = x;
-                floor.y = y;
-                floor.enable = true;
-                floorRow[y] = floor;
-            }
-            floorGrid[x] = floorRow;
-        }
-        floor.grid = floorGrid;
+        let floor = new DFloor();
         level.floor = floor;
+
+        let grid = new DGrid<DTile>(width, height);
+        floor.grid = grid;
+
+        for (let x = 0; x < width; x++) {
+            let floorRow = new Array<DTile>();
+            for (let y = 0; y < height; y++) {
+                let tile = new DTile();
+                tile.position = new DPosition(x, y);
+                tile.exist = new DExist(true);
+                floorRow[y] = tile;
+            }
+            grid.Grid[x] = floorRow;
+        }
 
         this.data = level;
     }
 
     start () {
         //设置地板数据
-        this.floor.Data = this.data.floor;
+         this.floor.Data = this.data.floor;
     }
 
     // update (dt) {}

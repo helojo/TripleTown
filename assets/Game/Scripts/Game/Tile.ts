@@ -1,30 +1,32 @@
 import Cell from "./Cell";
 import DataView from "./DataView";
+import { DProperty } from "./Data/Container";
+import DPosition from "./Data/Position";
+import DExist from "./Data/Exist";
 
 /**
  * 地砖数据
  */
-export class TileData {
+export class DTile extends DProperty {
     /**
-     * 是否启用
+     * 坐标
      */
-    public enable:boolean;
+    public position:DPosition;
 
     /**
-     * 横坐标
+     * 存在
      */
-    public x:number;
+    public exist:DExist;
 
-    /**
-     * 纵坐标
-     */
-    public y:number;
+    public constructor(){
+        super(DTile.name);
+    }
 }
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Tile extends DataView<TileData> {
+export default class Tile extends DataView<DTile> {
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
