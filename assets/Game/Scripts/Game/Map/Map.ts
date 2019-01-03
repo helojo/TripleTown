@@ -1,44 +1,29 @@
-import { DGrid } from "./Data/Grid";
-import { DContainer } from "./Data/Container";
-import GComponent from "./GComponent";
-import Cell from "./Cell";
-import Game from "./Game";
+import GComponent from "../GComponent";
+import { Block } from "./Block";
+import Game from "../Game";
+import { DHierarchy } from "../Data/Hierarchy";
 
-export class DHierarchy extends DContainer {
-    /**
-     * 网格
-     */
-    public get Grid(){
-        return <DGrid>this.getProperty(DGrid.name);
-    }
-    
-    public set Grid(grid){
-        this.setProperty(grid);
-    }
+export class DMap extends DHierarchy {
 
-    public constructor(name:string){
-        super(name);
+    public constructor(){
+        super(DMap.name);
     }
 }
-
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-/**
- * 层级
- */
-export default class Hierarchy extends GComponent{
+export default class Map extends GComponent {
     @property(cc.Prefab)
     /**
-     * 地板预制体
+     * 预制体
      */
     protected prefab:cc.Prefab = null;
 
     /**
-     * 地板网格
+     * 网格
      */
-    protected grid:Cell[][] = null;
+    protected grid:Block[][] = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -57,7 +42,7 @@ export default class Hierarchy extends GComponent{
      * 更新尺寸
      */
     private updateSize(){
-        let data = <DHierarchy>this.data;
+        let data = <DMap>this.data;
         let grid = data.Grid;
         this.node.width = grid.Width * Game.Side;
         this.node.height = grid.Height * Game.Side;
@@ -71,16 +56,16 @@ export default class Hierarchy extends GComponent{
      * 更新网格
      */
     private updateGrid(){
-        let data = <DHierarchy>this.data;
+        let data = <DMap>this.data;
         let grid = data.Grid;
         for (let x = 0; x < grid.Width; x++) {
-            let rowGrid = new Array<Cell>();
+            let rowGrid = new Array<Block>();
             for (let y = 0; y < grid.Height; y++) {
-                const tile = grid.Grid[x][y];
+                const cell = grid.Grid[x][y];
                 let tileNode = cc.instantiate(this.prefab);
                 this.node.addChild(tileNode);
-                let tileCom = tileNode.getComponent(Cell);
-                tileCom.Data = tile;
+                let tileCom = tileNode.getComponent(Block);
+                tileCom.Data = cell;
                 rowGrid[y] = tileCom;
             }
             this.grid[x] = rowGrid;
@@ -90,9 +75,9 @@ export default class Hierarchy extends GComponent{
     /**
      * 清理网格
      */
-    private clearGrid():Array<Array<Cell>>{
+    private clearGrid():Array<Array<Block>>{
         if (this.grid) {
-            let data = <DHierarchy>this.data;
+            let data = <DMap>this.data;
             let grid = data.Grid;
             for (let x = 0; x < grid.Width; x++) {
                 for (let y = 0; y < grid.Height; y++) {
@@ -104,7 +89,7 @@ export default class Hierarchy extends GComponent{
                 }
             }
         }else{
-            this.grid = new Array<Array<Cell>>();
+            this.grid = new Array<Array<Block>>();
         }
         return this.grid;
     }

@@ -4,16 +4,13 @@ import { Dictionary } from "typescript-collections";
  * 属性数据基类
  */
 export class DProperty {
-    protected name:string = null;
+    protected name:string = DProperty.name;
 
-    /**
-     * 获取名字
-     */
     public get Name(){
         return this.name;
     }
 
-    protected constructor(name:string){
+    public constructor(name:string){
         this.name = name;
     }
 }
@@ -28,7 +25,7 @@ export class DContainer extends DProperty {
     protected data:Dictionary<string, DProperty>;
 
     protected constructor(name:string){
-        super(name);
+        super(name == null ? DContainer.name : name);
         this.data = new Dictionary<string, DProperty>();
     }
 

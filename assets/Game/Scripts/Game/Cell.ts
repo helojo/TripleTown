@@ -2,7 +2,6 @@ import { DProperty } from "./Data/Container";
 import GComponent from "./GComponent";
 import { DPosition } from "./Data/Position";
 import { DExist } from "./Data/Exist";
-import Game from "./Game";
 
 /**
  * 细胞数据
@@ -47,8 +46,6 @@ export default class Cell extends GComponent {
         let data = <DCell>this.data;
         let position = data.Position;
         let coordinate = position.Coordinate;
-        // Game.Side;
-        // let xx = coordinate.x * Game.Side;
-        // this.node.x = 
+        this.node.setPosition(coordinate.x * 80, coordinate.y * 80);
     }
 }
