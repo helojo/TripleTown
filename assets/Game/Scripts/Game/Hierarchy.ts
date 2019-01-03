@@ -16,8 +16,8 @@ export class DHierarchy extends DContainer {
         this.setProperty(grid);
     }
 
-    public constructor(){
-        super(DHierarchy.name);
+    public constructor(name:string){
+        super(name);
     }
 }
 
