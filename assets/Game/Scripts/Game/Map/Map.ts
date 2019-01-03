@@ -2,6 +2,7 @@ import GComponent from "../GComponent";
 import { Block } from "./Block";
 import Game from "../Game";
 import { DHierarchy } from "../Data/Hierarchy";
+import Input from "./Input";
 
 export class DMap extends DHierarchy {
 
@@ -26,6 +27,13 @@ export default class Map extends GComponent {
     protected grid:Block[][] = null;
 
     // LIFE-CYCLE CALLBACKS:
+
+    protected updateData(){
+        let input = this.getComponent(Input);
+        if (input) {
+            input.Data = this.data;
+        }
+    }
 
     protected updateView(){
         //更新尺寸
