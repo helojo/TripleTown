@@ -80,7 +80,8 @@ export default class Floor extends DataView<DFloor> {
             for (let y = 0; y < grid.Height; y++) {
                 const tile = grid.Grid[x][y];
                 let tileNode = cc.instantiate(this.TilePrefab);
-                tileNode.setPosition(x * Game.Side, y * Game.Side);
+                let coordinate = tile.Position.Coordinate;
+                tileNode.setPosition(coordinate.x * Game.Side, coordinate.y * Game.Side);
                 this.node.addChild(tileNode);
                 let tileCom = tileNode.getComponent(Tile);
                 tileCom.Data = tile;

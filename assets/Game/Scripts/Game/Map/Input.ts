@@ -1,4 +1,6 @@
-import Map from "./Map";
+import { DMap } from "./Map";
+import DataView from "../DataView";
+import { SCoordinate } from "../Data/Position";
 
 // Learn TypeScript:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -13,23 +15,34 @@ import Map from "./Map";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Input extends cc.Component {
+export default class Input extends DataView<DMap> {
     
     // LIFE-CYCLE CALLBACKS:
 
-    protected resetInEditor(){
-        if (!this.getComponent(Map)) {
-            this.addComponent(Map);
-        }
+    onEnable () {
+        cc.log("Input.onEnable");
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
     }
 
-    onLoad () {
+    onDisable () {
+        cc.log("Input.onDisable");
+        this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    }
+
+    protected updateView(){
+        
+    }
+
+    /**
+     * 按下
+     * @param event 
+     */
+    private onTouchStart(event:cc.Event.EventTouch){
 
     }
 
-    start () {
-
+    private toGrid(location:cc.Vec2):SCoordinate{
+        return null;
     }
 
-    // update (dt) {}
 }

@@ -3,6 +3,7 @@ import DContainer from "../Data/Container";
 import DGrid from "../Data/Grid";
 import Cell, { DCell } from "./Cell";
 import Game from "../Game";
+import Input from "./Input";
 
 export class DMap extends DContainer {
     
@@ -39,12 +40,27 @@ export default class Map extends DataView<DMap> {
      */
     private cellGrid:Cell[][] = null;
 
+    /**
+     * 网格
+     */
+    public get Grid(){
+        return this.cellGrid;
+    }
+
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
 
     start () {
 
+    }
+
+    protected updateData(){
+        //触摸数据
+        let input = this.getComponent(Input)
+        if (input) {
+            input.Data = this.data;
+        }
     }
 
     protected updateView(){
@@ -81,7 +97,8 @@ export default class Map extends DataView<DMap> {
             for (let y = 0; y < grid.Height; y++) {
                 const cell = grid.Grid[x][y];
                 let cellNode = cc.instantiate(this.CellPrefab);
-                cellNode.setPosition(x * Game.Side, y * Game.Side);
+                let coordinate = cell.Position.Coordinate;
+                cellNode.setPosition(coordinate.x * Game.Side, coordinate.y * Game.Side);
                 this.node.addChild(cellNode);
                 let cellCom = cellNode.getComponent(Cell);
                 cellCom.Data = cell;

@@ -1,30 +1,38 @@
 import { DProperty } from "./Container";
 
+/**
+ * 层级
+ */
 export enum ETier {
     Floor,
     Cell
 }
 
 /**
+ * 坐标
+ */
+export class SCoordinate {
+    public x:number;
+    public y:number;
+
+    constructor(x:number, y:number){
+        this.x = x;
+        this.y = y;
+    }
+}
+
+/**
  * 位置数据
  */
 export default class DPosition extends DProperty {
-    protected x:number = null;
-    protected y:number = null;
+    protected coordinate:SCoordinate = null;
     protected tier:ETier = ETier.Cell;
 
     /**
-     * 横坐标
+     * 坐标
      */
-    public get X(){
-        return this.x;
-    }
-
-    /**
-     * 纵坐标
-     */
-    public get Y(){
-        return this.y;
+    public get Coordinate(){
+        return this.coordinate;
     }
 
     /**
@@ -38,9 +46,8 @@ export default class DPosition extends DProperty {
         this.tier = tier;
     }
 
-    public constructor(x:number, y:number){
+    public constructor(coordinate:SCoordinate){
         super(DPosition.name);
-        this.x = x;
-        this.y = y;
+        this.coordinate = coordinate;
     }
 }

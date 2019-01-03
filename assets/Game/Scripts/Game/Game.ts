@@ -2,7 +2,7 @@ import DContainer from "./Data/Container";
 import Floor, { DFloor } from "./Floor/Floor";
 import DGrid from "./Data/Grid";
 import { DTile } from "./Floor/Tile";
-import DPosition from "./Data/Position";
+import DPosition, { SCoordinate } from "./Data/Position";
 import DExist from "./Data/Exist";
 import DataView from "./DataView";
 import { DCell } from "./Map/Cell";
@@ -98,12 +98,12 @@ export default class Game extends DataView<DLevel> {
             let mapRow = new Array<DCell>();
             for (let y = 0; y < height; y++) {
                 let tile = new DTile();
-                tile.Position = new DPosition(x, y);
+                tile.Position = new DPosition(new SCoordinate(x, y));
                 tile.Exist = new DExist(true);
                 floorRow[y] = tile;
 
                 let cell = new DCell();
-                cell.Position = new DPosition(x, y);
+                cell.Position = new DPosition(new SCoordinate(x, y));
                 cell.Exist = new DExist(true);
                 cell.Display = new DDisplay();
                 cell.Display.num = this.getRandomInt(1, 5);
