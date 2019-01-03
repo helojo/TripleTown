@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.13584185781575722,
-      "y": 0.13584185781575722,
+      "x": 0.25487256371814093,
+      "y": 0.25487256371814093,
       "z": 1
     },
     "_quat": {
@@ -79,10 +79,10 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 14
+        "__id__": 12
       },
       {
-        "__id__": 15
+        "__id__": 13
       }
     ],
     "_prefab": null,
@@ -322,7 +322,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -433,17 +433,17 @@
     "_id": "d4p2+lrgJKcbQEBxcN9/kK"
   },
   {
-    "__type__": "4495fLkpztHh4Okb+knVk2q",
+    "__type__": "87c1cmHrX1Hy6ZXRWiYTi9B",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 8
     },
     "_enabled": true,
-    "TilePrefab": {
+    "prefab": {
       "__uuid__": "69094fb3-c989-466d-b164-b2e422b54bfb"
     },
-    "_id": "10EGZd2ABA4pXWaUxzctOW"
+    "_id": "06F4BNK0pOWLJ+JxM71nrP"
   },
   {
     "__type__": "cc.Node",
@@ -455,14 +455,7 @@
     "_children": [],
     "_active": true,
     "_level": 2,
-    "_components": [
-      {
-        "__id__": 11
-      },
-      {
-        "__id__": 12
-      }
-    ],
+    "_components": [],
     "_prefab": null,
     "_opacity": 255,
     "_color": {
@@ -510,43 +503,14 @@
     "_id": "4eR+jx9Q9GBLA/Kxjyyd4a"
   },
   {
-    "__type__": "f185aS6rdBCM7ZsrRHyO0Iy",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 10
-    },
-    "_enabled": true,
-    "CellPrefab": {
-      "__uuid__": "e1e9453e-55c2-438f-8e4b-378bc850d83a"
-    },
-    "_id": "32i1q/TzZN3ZwkZhQPaEq3"
-  },
-  {
-    "__type__": "4e0f1ekt2hCuaM1R4SYwwzh",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 10
-    },
-    "_enabled": true,
-    "_id": "f0w11lBFNB2oPjo+Jyzy0P"
-  },
-  {
-    "__type__": "f3161pPmzFEu4eZE3r2cEQ2",
+    "__type__": "849e1v3hqJJAJbKVACEKgE8",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 7
     },
     "_enabled": true,
-    "floor": {
-      "__id__": 9
-    },
-    "map": {
-      "__id__": 11
-    },
-    "_id": "9bmo3XGLFKbbRlV49Ro94O"
+    "_id": "41iQvwMc9KTaQ0XZKu7jlw"
   },
   {
     "__type__": "cc.Canvas",
