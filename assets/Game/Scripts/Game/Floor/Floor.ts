@@ -1,7 +1,7 @@
-import Game from "./Game";
-import DataView from "./DataView";
-import DContainer from "./Data/Container";
-import DGrid from "./Data/Grid";
+import DContainer from "../Data/Container";
+import DGrid from "../Data/Grid";
+import DataView from "../DataView";
+import Game from "../Game";
 import Tile, { DTile } from "./Tile";
 
 /**
@@ -9,9 +9,15 @@ import Tile, { DTile } from "./Tile";
  */
 export class DFloor extends DContainer {
     /**
-     * 地板网格
+     * 网格
      */
-    public grid:DGrid<DTile>;
+    public get Grid():DGrid<DTile>{
+        return <DGrid<DTile>>this.getProperty(DGrid.name);
+    }
+    
+    public set Grid(grid:DGrid<DTile>){
+        this.setProperty(grid);
+    }
 
     public constructor(){
         super(DFloor.name);
@@ -33,7 +39,10 @@ export default class Floor extends DataView<DFloor> {
      */
     private TilePrefab:cc.Prefab = null;
 
-    private tileGrid:Tile[][];
+    /**
+     * 地板网格
+     */
+    private tileGrid:Tile[][] = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -52,7 +61,7 @@ export default class Floor extends DataView<DFloor> {
      * 更新尺寸
      */
     private updateSize(){
-        let grid = this.data.grid;
+        let grid = this.data.Grid;
         this.node.width = grid.Width * Game.Side;
         this.node.height = grid.Height * Game.Side;
         this.node.anchorX = 0;
@@ -65,8 +74,9 @@ export default class Floor extends DataView<DFloor> {
      * 更新网格
      */
     private updateGrid(){
-        let grid = this.data.grid;
+        let grid = this.data.Grid;
         for (let x = 0; x < grid.Width; x++) {
+            let rowGrid = new Array<Tile>();
             for (let y = 0; y < grid.Height; y++) {
                 const tile = grid.Grid[x][y];
                 let tileNode = cc.instantiate(this.TilePrefab);
@@ -74,7 +84,9 @@ export default class Floor extends DataView<DFloor> {
                 this.node.addChild(tileNode);
                 let tileCom = tileNode.getComponent(Tile);
                 tileCom.Data = tile;
+                rowGrid[y] = tileCom;
             }
+            this.tileGrid[x] = rowGrid;
         }
     }
 
@@ -83,7 +95,7 @@ export default class Floor extends DataView<DFloor> {
      */
     private clearGrid():Array<Array<Tile>>{
         if (this.tileGrid) {
-            let grid = this.data.grid;
+            let grid = this.data.Grid;
             for (let x = 0; x < grid.Width; x++) {
                 for (let y = 0; y < grid.Height; y++) {
                     const tile = this.tileGrid[x][y];

@@ -12,10 +12,7 @@ export default class DExist extends DProperty {
     public get Visibile(){
         return this.visibile;
     }
-
-    /**
-     * 显示
-     */
+    
     public set Visibile(visibile:boolean){
         this.visibile = visibile;
     }

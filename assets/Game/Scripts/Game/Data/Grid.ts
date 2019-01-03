@@ -4,9 +4,9 @@ import { DProperty } from "./Container";
  * 网格数据
  */
 export default class DGrid<T> extends DProperty {
-    protected width:number;
-    protected height:number;
-    protected grid:Array<Array<T>>;
+    protected width:number = null;
+    protected height:number = null;
+    protected grid:Array<Array<T>> = null;
 
     /**
      * 宽度

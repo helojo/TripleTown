@@ -9,9 +9,9 @@ export enum ETier {
  * 位置数据
  */
 export default class DPosition extends DProperty {
-    protected x:number;
-    protected y:number;
-    protected tier:ETier;
+    protected x:number = null;
+    protected y:number = null;
+    protected tier:ETier = ETier.Cell;
 
     /**
      * 横坐标
@@ -33,10 +33,7 @@ export default class DPosition extends DProperty {
     public get Tier(){
         return this.tier;
     }
-
-    /**
-     * 层级
-     */
+    
     public set Tier(tier:ETier){
         this.tier = tier;
     }

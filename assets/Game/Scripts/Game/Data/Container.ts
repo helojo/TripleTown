@@ -4,7 +4,7 @@ import { Dictionary } from "typescript-collections";
  * 属性数据基类
  */
 export class DProperty {
-    protected name:string;
+    protected name:string = null;
 
     /**
      * 获取名字
