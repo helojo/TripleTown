@@ -1,52 +1,18 @@
-import DataView from "../DataView";
-import { DProperty } from "../Data/Container";
-import DPosition from "../Data/Position";
-import DExist from "../Data/Exist";
+import Cell, { DCell } from "../Cell";
 
 /**
  * 地砖数据
  */
-export class DTile extends DProperty {
-    protected position:DPosition = null;
-    protected exist:DExist = null;
+export class DTile extends DCell {
 
-    /**
-     * 坐标
-     */
-    public get Position(){
-        return this.position;
-    }
-
-    public set Position(position:DPosition){
-        this.position = position;
-    }
-
-    /**
-     * 存在
-     */
-    public get Exist(){
-        return this.exist;
-    }
-    
-    public set Exist(exist:DExist){
-        this.exist = exist;
-    }
-
-    public constructor(){
-        super(DTile.name);
-    }
 }
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Tile extends DataView<DTile> {
-    // LIFE-CYCLE CALLBACKS:
+/**
+ * 地砖
+ */
+export default class Tile extends Cell {
 
-    // onLoad () {}
-
-    start () {
-
-    }
-    
 }

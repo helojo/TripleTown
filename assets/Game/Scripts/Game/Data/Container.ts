@@ -21,7 +21,7 @@ export class DProperty {
 /**
  * 属性容器基类
  */
-export default class DContainer extends DProperty {
+export class DContainer extends DProperty {
     /**
      * 属性字典
      */

@@ -1,21 +1,22 @@
+import { DProperty } from "./Data/Container";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class DataView<DataType> extends cc.Component {
-    protected data:DataType;
+export default class GComponent extends cc.Component {
+    protected data:DProperty;
 
     /**
-     * 获取地砖数据
+     * 获取数据
      */
-    public get Data():DataType{
+    public get Data(){
         return this.data;
     }
 
     /**
-     * 设置地砖数据
+     * 设置数据
      */
-    public set Data(data:DataType){
+    public set Data(data){
         this.data = data;
         //更新数据
         this.updateData();

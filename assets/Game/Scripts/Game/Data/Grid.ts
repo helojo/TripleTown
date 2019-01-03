@@ -1,12 +1,13 @@
 import { DProperty } from "./Container";
+import { DCell } from "../Cell";
 
 /**
  * 网格数据
  */
-export default class DGrid<T> extends DProperty {
+export class DGrid extends DProperty {
     protected width:number = null;
     protected height:number = null;
-    protected grid:Array<Array<T>> = null;
+    protected grid:Array<Array<DCell>> = null;
 
     /**
      * 宽度
@@ -33,6 +34,6 @@ export default class DGrid<T> extends DProperty {
         super(DGrid.name);
         this.width = width;
         this.height = height;
-        this.grid = new Array<Array<T>>();
+        this.grid = new Array<Array<DCell>>();
     }
 }
