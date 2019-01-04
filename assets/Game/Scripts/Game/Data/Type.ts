@@ -14,7 +14,7 @@ export class DType extends DProperty {
         this.type = type;
     }
 
-    public constructor(){
+    public constructor(type:number){
         super(DType.name);
     }
 

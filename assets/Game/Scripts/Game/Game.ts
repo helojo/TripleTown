@@ -8,6 +8,7 @@ import { DExist } from "./Data/Exist";
 import Map, { DMap } from "./Map/Map";
 import { DBlock } from "./Map/Block";
 import { DDisplay } from "./Data/Display";
+import { DType } from "./Data/Type";
 
 export class DGame extends DContainer {
     /**
@@ -85,6 +86,7 @@ export default class Game extends GComponent {
                 block.Display = new DDisplay();
                 let type = this.getRandomInt(1, 5);
                 block.Display.Text = type.toString();
+                block.Type = new DType(type);
                 mapRow[y] = block;
             }
             floorGrid.Grid[x] = floorRow;

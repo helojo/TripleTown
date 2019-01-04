@@ -1,8 +1,10 @@
 import Cell, { DCell } from "../Cell";
 import { DDisplay } from "../Data/Display";
+import { DType } from "../Data/Type";
 
 export class DBlock extends DCell {
     protected display:DDisplay = null;
+    protected type:DType = null;
 
     /**
      * 显示
@@ -13,6 +15,17 @@ export class DBlock extends DCell {
 
     public set Display(display){
         this.display = display;
+    }
+
+    /**
+     * 类型
+     */
+    public get Type(){
+        return this.type;
+    }
+
+    public set Type(type){
+        this.type = type;
     }
 
     public constructor(){
