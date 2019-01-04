@@ -42,7 +42,6 @@ const {ccclass, property} = cc._decorator;
 export default class Cell extends GComponent {
 
     protected updateView(){
-        super.updateView();
         let data = <DCell>this.data;
         let position = data.Position;
         let coordinate = position.Coordinate;
