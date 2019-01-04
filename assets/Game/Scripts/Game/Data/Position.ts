@@ -15,9 +15,55 @@ export class SCoordinate {
     public x:number;
     public y:number;
 
-    constructor(x:number, y:number){
+    public constructor(x:number, y:number){
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * 判断是否相等
+     * @param coordinate 坐标
+     */
+    public equal(coordinate:SCoordinate):boolean{
+        return coordinate != null && coordinate.x == this.x && coordinate.y == this.y;
+    }
+
+    /**
+     * 判断是否是周围
+     * @param coordinate 坐标
+     */
+    public round(coordinate:SCoordinate):boolean{
+        let ret = false;
+
+        if (coordinate) {
+            let roundArray = [
+                {x:0,y:1},       //上
+                {x:0,y:-1},      //下
+                {x:-1,y:0},      //左
+                {x:1,y:0},       //右
+            ];
+            for (const dir of roundArray) {
+                let x = this.x + dir.x;
+                let y = this.y + dir.y;
+                if (x < 0 || y < 0) {
+                    continue;
+                }
+                ret = x == coordinate.x && y == coordinate.y;
+                if (ret) {
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    /**
+     * 转换为像素坐标
+     * @param side 边长
+     */
+    public toVec2(side:number):cc.Vec2{
+        return cc.v2(this.x * side, this.y * side);
     }
 }
 

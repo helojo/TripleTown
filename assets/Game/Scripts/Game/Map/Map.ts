@@ -3,6 +3,7 @@ import { Block } from "./Block";
 import Game from "../Game";
 import { DHierarchy } from "../Data/Hierarchy";
 import Input from "./Input";
+import { SCoordinate } from "../Data/Position";
 
 export class DMap extends DHierarchy {
 
@@ -21,6 +22,12 @@ export default class Map extends GComponent {
      */
     protected prefab:cc.Prefab = null;
 
+    @property(cc.Node)
+    /**
+     * 选中节点
+     */
+    protected select:cc.Node = null;
+
     /**
      * 网格
      */
@@ -28,11 +35,18 @@ export default class Map extends GComponent {
 
     // LIFE-CYCLE CALLBACKS:
 
-    protected updateData(){
-        let input = this.getComponent(Input);
-        if (input) {
-            input.Data = this.data;
-        }
+    onEnable () {
+        cc.log("Map.onEnable");
+        this.node.on(Input.SELECT, this.onSelect, this);
+        this.node.on(Input.SWITCH, this.onSwitch, this);
+        this.node.on(Input.CLICK, this.onClick, this);
+    }
+
+    onDisable () {
+        cc.log("Map.onDisable");
+        this.node.off(Input.SELECT, this.onSelect, this);
+        this.node.off(Input.SWITCH, this.onSwitch, this);
+        this.node.off(Input.CLICK, this.onClick, this);
     }
 
     protected updateView(){
@@ -100,5 +114,33 @@ export default class Map extends GComponent {
             this.grid = new Array<Array<Block>>();
         }
         return this.grid;
+    }
+
+    /**
+     * 点击监听
+     * @param coordinate 坐标
+     */
+    private onClick(coordinate:SCoordinate){
+        cc.log("Map.onClick.", coordinate.x, coordinate.y);
+    }
+
+    /**
+     * 选中监听
+     * @param coordinate 选中的坐标
+     * @param isSelect 是否选中
+     */
+    private onSelect(coordinate:SCoordinate, isSelect:boolean){
+        this.select.setPosition(coordinate.toVec2(Game.Side));
+        this.select.active = isSelect;
+        cc.log("Map.onSelect.", isSelect, coordinate.x, coordinate.y);
+    }
+
+    /**
+     * 交换坐标
+     * @param cooA 坐标A
+     * @param cooB 坐标B
+     */
+    private onSwitch(cooA:SCoordinate, cooB:SCoordinate){
+        cc.log("Map.onSwith.", cooA.x, cooA.y, "|", cooB.x, cooB.y);
     }
 }
