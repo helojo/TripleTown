@@ -33,12 +33,23 @@ export class ASpawn {
 
     public doAction(callback:Function){
         this.callback = callback;
+        let length = this.nodeArray.length;
+        let count = 0;
+        let comCallback = function(){
+            if (++count == length) {
+                if (callback) {
+                    callback();
+                }
+            }
+        }
         do {
             let node = this.nodeArray.pop();
             let action = this.actionArray.pop();
             if (node && action) {
                 let component = node.getComponent(action.Component);
-                
+                if (component) {
+                    component.doAction(action, comCallback);
+                }
             }
         } while (this.nodeArray.length > 0);
     }

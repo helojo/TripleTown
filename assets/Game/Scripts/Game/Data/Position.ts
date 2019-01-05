@@ -65,6 +65,13 @@ export class SCoordinate {
     public toVec2(side:number):cc.Vec2{
         return cc.v2(this.x * side, this.y * side);
     }
+
+    /**
+     * 克隆
+     */
+    public clone(){
+        return new SCoordinate(this.x, this.y);
+    }
 }
 
 export class DPosition extends DProperty{
@@ -76,6 +83,10 @@ export class DPosition extends DProperty{
      */
     public get Coordinate(){
         return this.coordinate;
+    }
+
+    public set Coordinate(coordinate){
+        this.coordinate = coordinate;
     }
 
     /**

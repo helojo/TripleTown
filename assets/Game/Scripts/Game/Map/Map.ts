@@ -4,6 +4,8 @@ import Game from "../Game";
 import { DHierarchy } from "../Data/Hierarchy";
 import Input from "./Input";
 import { SCoordinate } from "../Data/Position";
+import { ASpawn } from "../AComponent";
+import { DMove } from "../Action/AMove";
 
 export class DMap extends DHierarchy {
 
@@ -16,6 +18,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class Map extends GComponent {
+    protected touch:boolean = false;
+
     @property(cc.Prefab)
     /**
      * 预制体
@@ -32,6 +36,21 @@ export default class Map extends GComponent {
      * 网格
      */
     protected grid:Block[][] = null;
+
+    /**
+     * 是否可以触摸
+     */
+    public get Touch(){
+        return this.touch;
+    }
+
+    public set Touch(touch){
+        this.touch = touch;
+        let input = this.getComponent(Input);
+        if (input) {
+            input.enabled = touch;
+        }
+    }
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -58,6 +77,9 @@ export default class Map extends GComponent {
 
         //更新网格
         this.updateGrid();
+
+        //开启触摸
+        this.Touch = true;
     }
 
     /**
@@ -117,6 +139,25 @@ export default class Map extends GComponent {
     }
 
     /**
+     * 获取方块
+     * @param coordinate 坐标
+     */
+    protected getBlock(coordinate:SCoordinate):cc.Node{
+        return this.grid[coordinate.x][coordinate.y].node;
+    }
+
+    /**
+     * 交换方块
+     * @param cooA 坐标A
+     * @param cooB 坐标B
+     */
+    protected switchBlock(cooA, cooB){
+        let temp = this.grid[cooA.x][cooA.y];
+        this.grid[cooA.x][cooA.y] = this.grid[cooB.x][cooB.y];
+        this.grid[cooB.x][cooB.y] = temp;
+    }
+
+    /**
      * 点击监听
      * @param coordinate 坐标
      */
@@ -142,5 +183,29 @@ export default class Map extends GComponent {
      */
     private onSwitch(cooA:SCoordinate, cooB:SCoordinate){
         cc.log("Map.onSwith.", cooA.x, cooA.y, "|", cooB.x, cooB.y);
+        //动画中
+        this.Touch = false;
+        //创建同时动画容器
+        let spawn = new ASpawn();
+        let aNode = this.getBlock(cooA);
+        let aMove = new DMove(cooB);
+        spawn.pushAction(aNode, aMove);
+        let bNode = this.getBlock(cooB);
+        let bMove = new DMove(cooA);
+        spawn.pushAction(bNode, bMove);
+        spawn.doAction(this.onSwitchComplete.bind(this));
+        //交换坐标
+        this.switchBlock(cooA, cooB);
     }
+
+    /**
+     * 交换完成
+     */
+    private onSwitchComplete(){
+        cc.log("Map.onSwitch.Complete");
+        //操作中
+        this.Touch = true;
+    }
+
+
 }

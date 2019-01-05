@@ -28,10 +28,13 @@
     "_components": [
       {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 13
     },
     "_opacity": 255,
     "_color": {
@@ -396,6 +399,17 @@
     "text": {
       "__id__": 7
     },
+    "_id": ""
+  },
+  {
+    "__type__": "eb6e21SK4pPnovMyGYo6srn",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "interval": 0.25,
     "_id": ""
   },
   {
