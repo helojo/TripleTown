@@ -1,4 +1,4 @@
-import { DAction, AComponent } from "../AComponent";
+import { DAction, AComponent, DPackage, PSpawn } from "../AComponent";
 import { SCoordinate } from "../Data/Position";
 import Game from "../Game";
 import Cell, { DCell } from "../Cell";
@@ -16,6 +16,54 @@ export class DMove extends DAction {
     constructor(coordinate:SCoordinate){
         super(AMove.name);
         this.coordinate = coordinate;
+    }
+}
+
+export class PSwitch {
+    protected pkgA:DPackage = null;
+    protected pkgB:DPackage = null;
+
+    public get PackageA(){
+        return this.pkgA;
+    }
+
+    public get PackageB(){
+        return this.pkgB;
+    }
+
+    public doAction(callback:Function){
+        if (this.pkgA && this.pkgB) {
+            let spawnCallback = function(spawn){
+                callback(this);
+            }
+            let spawn = new PSpawn();
+            spawn.pushPackage(this.pkgA);
+            spawn.pushPackage(this.pkgB);
+            spawn.doAction(spawnCallback.bind(this));
+        }else{
+            callback(this);
+        }
+    }
+
+    public backAction(callback:Function){
+        if (this.pkgA && this.pkgB) {
+            let pkgA = new DPackage(this.pkgA.Node, this.pkgB.Action);
+            let pkgB = new DPackage(this.pkgB.Node, this.pkgA.Action);
+            let spawnCallback = function(spawn){
+                callback(this);
+            }
+            let spawn = new PSpawn();
+            spawn.pushPackage(pkgA);
+            spawn.pushPackage(pkgB);
+            spawn.doAction(spawnCallback.bind(this));
+        }else{
+            callback(this);
+        }
+    }
+
+    public constructor(pkgA:DPackage, pkgB:DPackage){
+        this.pkgA = pkgA;
+        this.pkgB = pkgB;
     }
 }
 

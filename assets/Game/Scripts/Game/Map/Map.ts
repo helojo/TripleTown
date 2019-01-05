@@ -4,8 +4,8 @@ import Game from "../Game";
 import { DHierarchy } from "../Data/Hierarchy";
 import Input from "./Input";
 import { SCoordinate } from "../Data/Position";
-import { ASpawn } from "../AComponent";
-import { DMove } from "../Action/AMove";
+import { DPackage } from "../AComponent";
+import { DMove, PSwitch } from "../Action/AMove";
 
 export class DMap extends DHierarchy {
 
@@ -186,26 +186,59 @@ export default class Map extends GComponent {
         //动画中
         this.Touch = false;
         //创建同时动画容器
-        let spawn = new ASpawn();
         let aNode = this.getBlock(cooA);
-        let aMove = new DMove(cooB);
-        spawn.pushAction(aNode, aMove);
+        let aPkg = new DPackage(aNode, new DMove(cooB));
         let bNode = this.getBlock(cooB);
-        let bMove = new DMove(cooA);
-        spawn.pushAction(bNode, bMove);
-        spawn.doAction(this.onSwitchComplete.bind(this));
-        //交换坐标
-        this.switchBlock(cooA, cooB);
+        let bPkg = new DPackage(bNode, new DMove(cooA));
+
+        let pSwitch = new PSwitch(aPkg, bPkg);
+        pSwitch.doAction(this.onSwitchComplete.bind(this));
     }
 
     /**
      * 交换完成
+     * @param pSwitch 交换对象
      */
-    private onSwitchComplete(){
+    private onSwitchComplete(pSwitch:PSwitch){
         cc.log("Map.onSwitch.Complete");
+        let moveA = <DMove>pSwitch.PackageA.Action;
+        let moveB = <DMove>pSwitch.PackageA.Action;
+        let cooA = moveA.Coordinate;
+        let cooB = moveB.Coordinate;
+        //交换坐标
+        this.switchBlock(cooA, cooB);
+        //寻找消除
+        if (this.findTriple()) {
+            
+        }else{
+            let schduleCallback = function(){
+                pSwitch.backAction(this.onResumeComplete.bind(this));
+            }
+            //延时恢复
+            this.scheduleOnce(schduleCallback.bind(this), 0.1);
+        }
+    }
+
+    /**
+     * 恢复完成
+     * @param pSwitch 交换对象
+     */
+    private onResumeComplete(pSwitch:PSwitch){
+        cc.log("Map.onResume.Complete");
+        let moveA = <DMove>pSwitch.PackageA.Action;
+        let moveB = <DMove>pSwitch.PackageA.Action;
+        let cooA = moveA.Coordinate;
+        let cooB = moveB.Coordinate;
+        //交换坐标
+        this.switchBlock(cooA, cooB);
         //操作中
         this.Touch = true;
     }
 
-
+    /**
+     * 寻找连续
+     */
+    private findTriple():boolean{
+        return false;
+    }
 }

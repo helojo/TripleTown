@@ -21,45 +21,97 @@ export class AComponent extends GComponent {
     }
 }
 
-export class ASpawn {
-    protected nodeArray:Array<cc.Node> = null;
-    protected actionArray:Array<DAction> = null;
+/**
+ * 动作包
+ */
+export class DPackage extends DProperty {
+    protected node:cc.Node = null;
+    protected action:DAction = null;
+
+    /**
+     * 动作节点
+     */
+    public get Node(){
+        return this.node;
+    }
+
+    /**
+     * 动作数据
+     */
+    public get Action(){
+        return this.action;
+    }
+
+    /**
+     * 执行动作
+     * @param callback 执行完回调
+     */
+    public doAction(callback){
+        let component = <AComponent>this.node.getComponent(this.action.Component);
+        if (component) {
+            let actCallback = function(){
+                callback(this);
+            }
+            component.doAction(this.action, actCallback.bind(this));
+        }else{
+            callback(this);
+        }
+    }
+
+    public constructor(node:cc.Node, action:DAction){
+        super(DPackage.name);
+        this.node = node;
+        this.action = action;
+    }
+}
+
+/**
+ * 同时进行
+ */
+export class PSpawn {
+    protected packages:Array<DPackage> = null;
     protected callback:Function = null;
     
-    public pushAction(node:cc.Node, action:DAction){
-        this.nodeArray.push(node);
-        this.actionArray.push(action);
+    /**
+     * 动作包们
+     */
+    public get Packages(){
+        return this.packages;
+    }
+
+    /**
+     * 添加动作包
+     * @param pkg 动作包
+     */
+    public pushPackage(pkg:DPackage){
+        this.packages.push(pkg);
     }
 
     public doAction(callback:Function){
         this.callback = callback;
-        let length = this.nodeArray.length;
+        let length = this.packages.length;
         let count = 0;
-        let comCallback = function(){
+        let pkgCallback = function(pkg){
             if (++count == length) {
                 if (callback) {
-                    callback();
+                    callback(this);
                 }
             }
         }
-        do {
-            let node = this.nodeArray.pop();
-            let action = this.actionArray.pop();
-            if (node && action) {
-                let component = node.getComponent(action.Component);
-                if (component) {
-                    component.doAction(action, comCallback);
-                }
-            }
-        } while (this.nodeArray.length > 0);
+
+        for (const pkg of this.packages) {
+            pkg.doAction(pkgCallback);
+        }
     }
 
     public constructor(){
-        this.nodeArray = new Array<cc.Node>();
-        this.actionArray = new Array<DAction>();
+        this.packages = new Array<DPackage>();
     }
 }
 
+/**
+ * 动作数据
+ */
 export class DAction extends DProperty {
     protected component:string = null
 
