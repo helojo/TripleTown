@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "FloorCell",
+    "_name": "Tile",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -283,7 +283,7 @@
     "sync": false
   },
   {
-    "__type__": "ad34aIMOgREZ7ZSBw6kV5v7",
+    "__type__": "acd35sBUGVJiKLK7ipd0PLB",
     "_name": "",
     "_objFlags": 0,
     "node": {

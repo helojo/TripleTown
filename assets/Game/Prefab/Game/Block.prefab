@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Cell",
+    "_name": "Block",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -28,13 +28,10 @@
     "_components": [
       {
         "__id__": 11
-      },
-      {
-        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 12
     },
     "_opacity": 255,
     "_color": {
@@ -332,6 +329,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
+    "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -389,27 +387,13 @@
     "sync": false
   },
   {
-    "__type__": "9349dMy+PRNsJ5L7RHBv6DL",
+    "__type__": "a96bbdi2E1Ec6HOH6ug1ZAU",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "text": {
-      "__id__": 7
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "eb6e21SK4pPnovMyGYo6srn",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "interval": 0.25,
     "_id": ""
   },
   {
