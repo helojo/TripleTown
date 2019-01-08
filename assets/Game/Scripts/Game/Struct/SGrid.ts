@@ -28,6 +28,11 @@ export default class SGrid<T> {
             let width = <number>size;
             this.size = new SSize(width, height);
         }
-        this.map = new Array<Array<T>>();
+        let map = new Array<Array<T>>();
+        this.map = map;
+
+        for (let x = 0; x < this.size.Width; x++) {
+            map[x] = new Array<T>();
+        }
     }
 }
