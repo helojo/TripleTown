@@ -1,5 +1,6 @@
 import CLogic from "./Property/CLogic";
-import CLevel from "./Property/CLevel";
+import CLevel from "./CLevel";
+import SLevel from "../Struct/SLevel";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,4 +15,9 @@ export default class CGame extends cc.Component {
 
     @property(CLogic)
     protected logic:CLogic = null;
+
+    protected start(){
+        let lProperty = this.level.generate(new SLevel());
+        this.logic.Property = lProperty;
+    }
 }
