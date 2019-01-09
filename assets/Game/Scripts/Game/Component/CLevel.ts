@@ -23,7 +23,7 @@ export default class CLevel extends cc.Component {
         let logic = new PLogic();
 
         let floor = new PFloor();
-        logic.Floor = floor;
+        logic.Layers.push(floor);
         let tileGrid = new SGrid<PTile>(9, 9);
         floor.Grid = tileGrid;
         const tileMap = tileGrid.Map;
@@ -37,8 +37,8 @@ export default class CLevel extends cc.Component {
             }
         }
 
-        let map = new PMap();
-        logic.Map = map;
+        // let map = new PMap();
+        // logic.Map = map;
 
         return logic;
     }

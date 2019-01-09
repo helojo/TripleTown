@@ -1,19 +1,18 @@
 import GProperty from "../GProperty";
-import PFloor from "./Layer/PFloor";
-import PMap from "./Layer/PMap";
+import PLayer from "./PLayer";
 
 /**
  * 逻辑
  */
 export default class PLogic extends GProperty {
-
     /**
-     * 地板
+     * 所有层级
      */
-    public Floor:PFloor = null;
+    public Layers:Array<PLayer> = null;
 
-    /**
-     * 地图
-     */
-    public Map:PMap = null;
+    public constructor(){
+        super();
+
+        this.Layers = new Array<PLayer>();
+    }
 }

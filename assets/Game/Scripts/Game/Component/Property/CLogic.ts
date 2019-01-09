@@ -1,6 +1,7 @@
 import CProperty from "../CProperty";
 import PLogic from "../../Property/PLogic";
-import CFloor from "./Layer/CFloor";
+import CLayer from "./CLayer";
+import CNode from "./CNode";
 
 const {ccclass, property} = cc._decorator;
 
@@ -10,13 +11,17 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CLogic extends CProperty {
 
-    @property(cc.Node)
-    protected floor:cc.Node = null;
-
     protected onView(property:PLogic){
         cc.log("CLogic.onView");
-        //地板
-        let cFloor = this.floor.getComponent<CFloor>(CFloor);
-        cFloor.Property = property.Floor;
+        for (const layer of property.Layers) {
+            let cName = layer.Component;
+            if (!cName) {
+                continue;
+            }
+            let component = <CProperty>this.addComponent(cName);
+            if (component) {
+                component.Property = layer;
+            }
+        }
     }
 }

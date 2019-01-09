@@ -1,10 +1,15 @@
 import PLayer from "../PLayer";
-import SGrid from "../../Struct/SGrid";
-import PTile from "../Node/PTile";
+import { EHierarchy } from "../../GEnum";
 
 /**
  * 地板
  */
 export default class PFloor extends PLayer {
-    public Grid:SGrid<PTile> = null;
+    
+    constructor(){
+        super();
+        this.hierarchy = EHierarchy.Floor;
+        this.component = "CFloor";
+        this.prefab = "Tile";
+    }
 }

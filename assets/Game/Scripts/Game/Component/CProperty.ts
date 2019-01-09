@@ -8,13 +8,23 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CProperty extends cc.Component {
     protected property:GProperty = null;
+    protected depend:CProperty = null;
+
+    /**
+     * 依赖组件
+     */
+    public get Depend(){
+        return this.depend;
+    }
 
     /**
      * 属性
      */
     public set Property(property:GProperty){
         this.property = property;
-
+        if (property && property.Depend) {
+            this.depend = this.addComponent(property.Depend);
+        }
         this.onData(property);
         this.onView(property);
         this.onAction(property);
