@@ -11,13 +11,13 @@ const {ccclass, property} = cc._decorator;
 export default class CGame extends cc.Component {
     
     @property(CLevel)
-    protected level:CLevel = null;
+    protected cLevel:CLevel = null;
 
     @property(CLogic)
-    protected logic:CLogic = null;
+    protected cLogic:CLogic = null;
 
-    protected start(){
-        let lProperty = this.level.generate(new SLevel());
-        this.logic.Property = lProperty;
+    start(){
+        let pLogic = this.cLevel.generate(new SLevel());
+        this.cLogic.Property = pLogic;
     }
 }

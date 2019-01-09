@@ -4,6 +4,7 @@ import PFloor from "../Property/Layer/PFloor";
 import PMap from "../Property/Layer/PMap";
 import SGrid from "../Struct/SGrid";
 import PTile from "../Property/Node/PTile";
+import SPosition from "../Struct/SPosition";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,7 +31,9 @@ export default class CLevel extends cc.Component {
         let tileHeight = tileGrid.Size.Width;
         for (let x = 0; x < tileWidth; x++) {
             for (let y = 0; y < tileHeight; y++) {
-                tileMap[x][y] = new PTile();
+                let pTile = new PTile();
+                pTile.Position = new SPosition(x, y);
+                tileMap[x][y] = pTile;
             }
         }
 
