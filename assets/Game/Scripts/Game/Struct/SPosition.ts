@@ -74,4 +74,11 @@ export default class SPosition {
     public clone(){
         return new SPosition(this.x, this.y);
     }
+
+    /**
+     * 转换为字符串
+     */
+    public toString(){
+        return cc.js.formatStr("[%s,%s]", this.x.toString(), this.y.toString());
+    }
 }
