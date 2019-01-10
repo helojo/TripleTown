@@ -46,12 +46,24 @@ export default class CLevel extends cc.Component {
         const blockMap = blockGrid.Map;
         for (let x = 0; x < width; x++) {
             for (let y = 0; y < height; y++) {
-                let pBlock = new PBlock();
+                let type = this.getRandomInt(1, 5);
+                let pBlock = new PBlock(type);
                 pBlock.Position = new SPosition(x, y);
                 blockMap[x][y] = pBlock;
             }
         }
 
         return logic;
+    }
+
+    /**
+     * 获取范围内随机整数
+     * @param min 最小值
+     * @param max 最大值
+     */
+    protected getRandomInt(min: number, max: number): number {
+        var Range = max - min;
+        var Rand = Math.random();
+        return(min + Math.round(Rand * Range));
     }
 }
