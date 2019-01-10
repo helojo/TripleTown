@@ -7,3 +7,12 @@ export enum EHierarchy {
     Map,
     End
 }
+
+/**
+ * 输入事件
+ */
+export enum EInput {
+    Select = "InputSelect",
+    Switch = "InputSwitch",
+    Click = "InputClick"
+}
