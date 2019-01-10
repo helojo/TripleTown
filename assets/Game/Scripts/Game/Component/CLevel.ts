@@ -6,6 +6,7 @@ import SGrid from "../Struct/SGrid";
 import PTile from "../Property/Node/PTile";
 import SPosition from "../Struct/SPosition";
 import PBlock from "../Property/Node/PBlock";
+import PSelect from "../Property/Layer/PSelect";
 
 const {ccclass, property} = cc._decorator;
 
@@ -38,6 +39,9 @@ export default class CLevel extends cc.Component {
                 tileMap[x][y] = pTile;
             }
         }
+
+        let select = new PSelect();
+        logic.Layers.push(select);
 
         let map = new PMap();
         logic.Layers.push(map);

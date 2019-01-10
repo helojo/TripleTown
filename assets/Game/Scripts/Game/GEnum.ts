@@ -4,6 +4,7 @@
 export enum EHierarchy {
     Began,
     Floor,
+    Select,
     Map,
     End
 }

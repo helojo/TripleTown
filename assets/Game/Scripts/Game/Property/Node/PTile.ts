@@ -5,7 +5,4 @@ import PNode from "../PNode";
  */
 export default class PTile extends PNode {
     
-    public constructor(){
-        super();
-    }
 }

@@ -10,6 +10,13 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CGame extends cc.Component {
     
+    /**
+     * 游戏资源路径
+     */
+    public static get ResourcesPath(){
+        return "Prefab/Game/";
+    }
+
     @property(CLevel)
     protected cLevel:CLevel = null;
 
