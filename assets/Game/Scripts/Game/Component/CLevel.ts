@@ -71,7 +71,7 @@ export default class CLevel extends cc.Component {
         for (let x = 0; x < width; x++) {
             let row = new Array<number>()
             for (let y = 0; y < height; y++) {
-                let type = this.getRandomInt(1, max);
+                let type = this.getRandomInt(0, max);
                 row[y] = type;
             }
             map[x] = row;

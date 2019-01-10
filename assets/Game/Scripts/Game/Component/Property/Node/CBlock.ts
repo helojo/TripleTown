@@ -12,9 +12,22 @@ export default class CBlock extends CNode {
     @property(cc.Label)
     protected text:cc.Label = null;
 
+    @property(cc.Node)
+    protected rect:cc.Node = null;
+
+    @property([cc.Color])
+    protected colors:cc.Color[] = [];
+
     protected onView(property:PBlock){
         super.onView(property);
         
         this.text.string = property.Text;
+
+        let color = this.colors[property.Type];
+
+        if (color) {
+            this.rect.color = color;
+        }
+
     }
 }
