@@ -10,7 +10,6 @@ const {ccclass, property} = cc._decorator;
 export default class CLogic extends CProperty {
 
     protected onView(property:PLogic){
-        cc.log("CLogic.onView");
         for (const layer of property.Layers) {
             let cName = layer.Component;
             if (!cName) {
@@ -21,6 +20,5 @@ export default class CLogic extends CProperty {
                 component.Property = layer;
             }
         }
-        
     }
 }
