@@ -79,10 +79,10 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 16
       },
       {
-        "__id__": 16
+        "__id__": 17
       }
     ],
     "_prefab": null,
@@ -318,17 +318,17 @@
         "__id__": 9
       },
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_active": true,
     "_level": 2,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 14
       },
       {
-        "__id__": 14
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -450,6 +450,9 @@
       },
       {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": null,
@@ -520,6 +523,23 @@
     "_id": "15E3jHQeNPqr8TVAUrmf3O"
   },
   {
+    "__type__": "cc.Mask",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 9
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": null,
+    "_type": 0,
+    "_segments": 64,
+    "_N$alphaThreshold": 0,
+    "_N$inverted": false,
+    "_id": "0bY2V5f3FGxbYuJG+XoOUb"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "Top",
     "_objFlags": 0,
@@ -585,7 +605,7 @@
     },
     "_enabled": true,
     "cLevel": {
-      "__id__": 14
+      "__id__": 15
     },
     "cLogic": {
       "__id__": 10
