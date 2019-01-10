@@ -1,7 +1,5 @@
 import CProperty from "../CProperty";
 import PLogic from "../../Property/PLogic";
-import CLayer from "./CLayer";
-import CNode from "./CNode";
 
 const {ccclass, property} = cc._decorator;
 
@@ -23,5 +21,6 @@ export default class CLogic extends CProperty {
                 component.Property = layer;
             }
         }
+        
     }
 }
