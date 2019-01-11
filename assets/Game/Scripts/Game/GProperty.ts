@@ -1,7 +1,8 @@
 import SDepend from "./Struct/SDepend";
+import { Dictionary } from "typescript-collections";
 
 export default class GProperty {
-    protected children:Array<GProperty> = null;
+    protected children:Dictionary<string, GProperty> = null;
 
     /**
      * 依赖
@@ -16,6 +17,6 @@ export default class GProperty {
     }
 
     public constructor (){
-        this.children = new Array<GProperty>();
+        this.children = new Dictionary<string, GProperty>();
     }
 }
