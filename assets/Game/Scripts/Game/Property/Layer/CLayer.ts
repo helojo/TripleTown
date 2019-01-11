@@ -1,7 +1,8 @@
 import CProperty from "../CProperty";
-import CNode from "./CNode";
-import PLayer from "../../Property/PLayer";
-import CGame from "../CGame";
+import CNode from "../Node/CNode";
+import PLayer from "./PLayer";
+import Game from "../../Game";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -17,7 +18,7 @@ export default class CLayer extends CProperty {
     }
 
     protected onView(property:PLayer){
-        let path = CGame.ResourcesPath + property.Prefab;
+        let path = Game.ResourcesPath + property.Prefab;
         cc.loader.loadRes(path, cc.Prefab, this.onLoadComplete.bind(this));
     }
 

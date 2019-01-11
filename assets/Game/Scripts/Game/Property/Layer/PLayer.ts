@@ -1,7 +1,8 @@
-import GProperty from "../GProperty";
-import PTile from "./Node/PTile";
-import SGrid from "../Struct/SGrid";
-import { EHierarchy } from "../GEnum";
+import GProperty from "../../GProperty";
+import { EHierarchy } from "../../GEnum";
+import PTile from "../Node/Tile/PTile";
+import SGrid from "../../Struct/SGrid";
+
 
 /**
  * 层级

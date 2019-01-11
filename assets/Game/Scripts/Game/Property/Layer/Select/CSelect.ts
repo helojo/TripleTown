@@ -1,9 +1,9 @@
 import CLayer from "../CLayer";
-import PSelect from "../../../Property/Layer/PSelect";
 import SPosition from "../../../Struct/SPosition";
 import { EInput } from "../../../GEnum";
-import CGame from "../../CGame";
-import CLight from "../Node/CLight";
+import CLight from "../../Node/Light/CLight";
+import PSelect from "./PSelect";
+import Game from "../../../Game";
 
 const {ccclass, property} = cc._decorator;
 
@@ -36,7 +36,7 @@ export default class CSelect extends CLayer {
             this.enabled = true;
         }
 
-        let path = CGame.ResourcesPath + property.Prefab;
+        let path = Game.ResourcesPath + property.Prefab;
         cc.loader.loadRes(path, cc.Prefab, onLoadComplete.bind(this));
     }
 

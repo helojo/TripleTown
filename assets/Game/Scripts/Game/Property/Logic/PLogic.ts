@@ -1,5 +1,5 @@
-import GProperty from "../GProperty";
-import PLayer from "./PLayer";
+import GProperty from "../../GProperty";
+
 
 /**
  * 逻辑

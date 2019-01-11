@@ -1,4 +1,4 @@
-import GProperty from "../GProperty";
+import GProperty from "../../GProperty";
 
 /**
  * 动作

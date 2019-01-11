@@ -1,5 +1,6 @@
-import SPosition from "../Struct/SPosition";
-import { EInput } from "../GEnum";
+import SPosition from "../../Struct/SPosition";
+import { EInput } from "../../GEnum";
+
 
 const {ccclass, property} = cc._decorator;
 

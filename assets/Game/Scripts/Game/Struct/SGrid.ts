@@ -1,5 +1,5 @@
 import SSize from "./SSize";
-import PNode from "../Property/PNode";
+import PNode from "../Property/Node/PNode";
 
 /**
  * 网格

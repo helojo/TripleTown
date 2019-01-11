@@ -1,5 +1,5 @@
 import CNode from "../CNode";
-import PBlock from "../../../Property/Node/PBlock";
+import PBlock from "./PBlock";
 
 const {ccclass, property} = cc._decorator;
 

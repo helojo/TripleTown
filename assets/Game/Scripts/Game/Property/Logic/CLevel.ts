@@ -1,13 +1,14 @@
-import SLevel from "../Struct/SLevel";
-import PLogic from "../Property/PLogic";
-import PFloor from "../Property/Layer/PFloor";
-import PMap from "../Property/Layer/PMap";
-import SGrid from "../Struct/SGrid";
-import PTile from "../Property/Node/PTile";
-import SPosition from "../Struct/SPosition";
-import PBlock from "../Property/Node/PBlock";
-import PSelect from "../Property/Layer/PSelect";
-import SDepend, { SComponent } from "../Struct/SDepend";
+import SLevel from "../../Struct/SLevel";
+import PLogic from "./PLogic";
+import SDepend, { SComponent } from "../../Struct/SDepend";
+import PFloor from "../Layer/Floor/PFloor";
+import SGrid from "../../Struct/SGrid";
+import PTile from "../Node/Tile/PTile";
+import SPosition from "../../Struct/SPosition";
+import PSelect from "../Layer/Select/PSelect";
+import PMap from "../Layer/Map/PMap";
+import PBlock from "../Node/Block/PBlock";
+
 
 const {ccclass, property} = cc._decorator;
 

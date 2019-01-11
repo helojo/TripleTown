@@ -1,9 +1,8 @@
 import CProperty from "../CProperty";
-import PNode from "../../Property/PNode";
 import SPosition from "../../Struct/SPosition";
-import PAction from "../../Property/PAction";
-import CAction from "./CAction";
-
+import PNode from "./PNode";
+import PAction from "../Action/PAction";
+import CAction from "../Action/CAction";
 const {ccclass, property} = cc._decorator;
 
 /**

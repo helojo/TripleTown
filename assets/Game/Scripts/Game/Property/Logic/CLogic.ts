@@ -1,5 +1,5 @@
 import CProperty from "../CProperty";
-import PLogic from "../../Property/PLogic";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -8,4 +8,5 @@ const {ccclass, property} = cc._decorator;
  */
 @ccclass
 export default class CLogic extends CProperty {
+    
 }

@@ -1,5 +1,5 @@
 import CProperty from "../CProperty";
-import PAction from "../../Property/PAction";
+import PAction from "./PAction";
 
 const {ccclass, property} = cc._decorator;
 

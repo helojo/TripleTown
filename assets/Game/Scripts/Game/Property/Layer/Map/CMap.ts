@@ -1,8 +1,6 @@
 import CLayer from "../CLayer";
 import { EInput } from "../../../GEnum";
 import SPosition from "../../../Struct/SPosition";
-import PMap from "../../../Property/Layer/PMap";
-import CSelect from "../Node/CLight";
 
 const {ccclass, property} = cc._decorator;
 

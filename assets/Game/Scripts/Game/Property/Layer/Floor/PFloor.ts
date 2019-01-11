@@ -1,5 +1,5 @@
 import PLayer from "../PLayer";
-import { EHierarchy } from "../../GEnum";
+import { EHierarchy } from "../../../GEnum";
 
 /**
  * 地板

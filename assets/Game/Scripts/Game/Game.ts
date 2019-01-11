@@ -1,6 +1,7 @@
-import CLogic from "./Property/CLogic";
-import CLevel from "./CLevel";
-import SLevel from "../Struct/SLevel";
+import CLevel from "./Property/Logic/CLevel";
+import CLogic from "./Property/Logic/CLogic";
+import SLevel from "./Struct/SLevel";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -8,7 +9,7 @@ const {ccclass, property} = cc._decorator;
  * 游戏
  */
 @ccclass
-export default class CGame extends cc.Component {
+export default class Game extends cc.Component {
     
     /**
      * 游戏资源路径
