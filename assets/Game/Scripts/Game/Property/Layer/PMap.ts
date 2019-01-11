@@ -9,7 +9,6 @@ export default class PMap extends PLayer {
     constructor(){
         super();
         this.hierarchy = EHierarchy.Map;
-        this.component = "CMap";
         this.prefab = "Block";
     }
 }

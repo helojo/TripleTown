@@ -8,7 +8,6 @@ import { EHierarchy } from "../GEnum";
  */
 export default class PLayer extends GProperty {
     protected hierarchy:EHierarchy = EHierarchy.Began;
-    protected component:string = null;
     protected prefab:string = null;
 
     /**
@@ -21,13 +20,6 @@ export default class PLayer extends GProperty {
      */
     public get Hierarchy(){
         return this.hierarchy;
-    }
-
-    /**
-     * 绑定组件
-     */
-    public get Component(){
-        return this.component;
     }
 
     /**

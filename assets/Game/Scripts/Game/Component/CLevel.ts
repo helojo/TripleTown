@@ -7,6 +7,7 @@ import PTile from "../Property/Node/PTile";
 import SPosition from "../Struct/SPosition";
 import PBlock from "../Property/Node/PBlock";
 import PSelect from "../Property/Layer/PSelect";
+import SDepend, { SComponent } from "../Struct/SDepend";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,8 +27,12 @@ export default class CLevel extends cc.Component {
         let width = 9;
         let height = 9;
 
+        let depend = new SDepend();
+        logic.Depend = depend;
+
         let floor = new PFloor();
-        logic.Layers.push(floor);
+        let scFloor = new SComponent("CFloor", floor);
+        depend.Components.push(scFloor);
         let tileGrid = new SGrid<PTile>(width, height);
         floor.Grid = tileGrid;
         const tileMap = tileGrid.Map;
@@ -40,10 +45,12 @@ export default class CLevel extends cc.Component {
         }
 
         let select = new PSelect();
-        logic.Layers.push(select);
+        let scSelect = new SComponent("CSelect", select);
+        depend.Components.push(scSelect);
 
         let map = new PMap();
-        logic.Layers.push(map);
+        let scMap = new SComponent("CMap", map);
+        depend.Components.push(scMap);
         let blockGrid = new SGrid<PBlock>(width, height);
         map.Grid = blockGrid;
         const blockMap = blockGrid.Map;

@@ -9,7 +9,6 @@ export default class PFloor extends PLayer {
     constructor(){
         super();
         this.hierarchy = EHierarchy.Floor;
-        this.component = "CFloor";
         this.prefab = "Tile";
     }
 }

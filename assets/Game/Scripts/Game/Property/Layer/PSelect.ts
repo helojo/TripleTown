@@ -9,7 +9,6 @@ export default class PSelect extends PLayer {
     constructor(){
         super();
         this.hierarchy = EHierarchy.Select;
-        this.component = "CSelect";
         this.prefab = "Light";
     }
 }

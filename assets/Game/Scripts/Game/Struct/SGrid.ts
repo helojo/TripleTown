@@ -1,9 +1,10 @@
 import SSize from "./SSize";
+import PNode from "../Property/PNode";
 
 /**
  * 网格
  */
-export default class SGrid<T> {
+export default class SGrid<T extends PNode> {
     protected size:SSize = null;
     protected map:Array<Array<T>> = null;
 

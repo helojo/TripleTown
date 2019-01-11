@@ -25,7 +25,20 @@ export default class CProperty extends cc.Component {
      * @param property 属性
      */
     protected onData(property:GProperty){
-
+        let depend = property.Depend;
+        if (depend) {
+            let components = depend.Components;
+            for (const sComp of components) {
+                let name = sComp.Name;
+                let comp = <CProperty>this.getComponent(name);
+                if (!comp) {
+                    comp = <CProperty>this.addComponent(name);
+                }
+                if (comp && sComp.Property) {
+                    comp.Property = sComp.Property;
+                }
+            }
+        }
     }
 
     /**
