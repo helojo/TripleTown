@@ -13,6 +13,8 @@ const {ccclass, property} = cc._decorator;
 export default class CNode extends CProperty {
     protected position:SPosition = null;
     protected action:PAction = null;
+    @property
+    protected side:number = 80;
 
     /**
      * 设置坐标
@@ -34,8 +36,9 @@ export default class CNode extends CProperty {
     /**
      * 边长
      */
-    @property
-    protected side:number = 80;
+    public get Side(){
+        return this.side;
+    }
 
     protected onView(property:PNode){
         this.Position = property.Position;
