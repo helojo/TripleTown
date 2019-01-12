@@ -34,6 +34,8 @@ export default class CMap extends CLayer {
      * @param positionB 坐标B
      */
     protected onInputSwitch(positionA:SPosition, positionB:SPosition){
+        let cNodeA = this.map[positionA.X][positionA.Y];
+        let cNodeB = this.map[positionB.X][positionB.Y];
         cc.log("CMap.onInputSwitch.", positionA.toString(), positionB.toString());
     }
 }

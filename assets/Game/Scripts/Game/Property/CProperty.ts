@@ -17,7 +17,6 @@ export default class CProperty extends cc.Component {
 
         this.onData(property);
         this.onView(property);
-        this.onAction(property);
     }
 
     /**
@@ -46,14 +45,6 @@ export default class CProperty extends cc.Component {
      * @param property 属性
      */
     protected onView(property:GProperty){
-        
-    }
-
-    /**
-     * 动作消息
-     * @param property 属性
-     */
-    protected onAction(property:GProperty){
         
     }
 }
