@@ -1,14 +1,23 @@
 import CAction from "../CAction";
 import PSpawn from "./PSpawn";
 import CProperty from "../../CProperty";
+import CNode from "../../Node/CNode";
 
+const {ccclass, property} = cc._decorator;
+
+/**
+ * 批量
+ */
+@ccclass
 export default class CSpawn extends CAction {
     protected count:number = 0;
 
     protected onData(pSpawn:PSpawn){
-        let actions = pSpawn.Actions;
-        for (const action of actions) {
-            let bind = this.bindComponent(action.Bind);
+        let packages = pSpawn.Actions;
+        for (const sPackage of packages) {
+            let action = sPackage.Action;
+            let node = sPackage.Node;
+            let bind = this.bindComponent(node, action.Bind);
             if (bind) {
                 this.count++;
                 action.Callback = this.callback.bind(this);
@@ -28,10 +37,10 @@ export default class CSpawn extends CAction {
         }
     }
 
-    private bindComponent(name:string){
-        let comp = <CAction>this.getComponent(name);
+    private bindComponent(node:CNode, name:string){
+        let comp = <CAction>node.getComponent(name);
         if (!comp) {
-            comp = <CAction>this.addComponent(name);
+            comp = <CAction>node.addComponent(name);
         }
         return comp;
     }

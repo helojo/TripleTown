@@ -1,6 +1,9 @@
 import CLayer from "../CLayer";
 import { EInput } from "../../../GEnum";
 import SPosition from "../../../Struct/SPosition";
+import PMove from "../../Action/Move/PMove";
+import PSpawn, { SActionPackage } from "../../Action/Spawn/PSpawn";
+import CSpawn from "../../Action/Spawn/CSpawn";
 
 const {ccclass, property} = cc._decorator;
 
@@ -36,6 +39,17 @@ export default class CMap extends CLayer {
     protected onInputSwitch(positionA:SPosition, positionB:SPosition){
         let cNodeA = this.map[positionA.X][positionA.Y];
         let cNodeB = this.map[positionB.X][positionB.Y];
+        let pMoveA = new PMove(1, positionB);
+        let pMoveB = new PMove(1, positionA);
+        let pSpawn = new PSpawn(this.onSwitchComplete.bind(this));
+        let sPackageA = new SActionPackage(cNodeA, pMoveA);
+        let sPackageB = new SActionPackage(cNodeB, pMoveB);
+        pSpawn.Actions.push(sPackageA, sPackageB);
+        this.Action = pSpawn;
         cc.log("CMap.onInputSwitch.", positionA.toString(), positionB.toString());
+    }
+
+    private onSwitchComplete(cProperty:CSpawn, pAction:PSpawn){
+        cc.log("CMap.onSwitchComplete");
     }
 }

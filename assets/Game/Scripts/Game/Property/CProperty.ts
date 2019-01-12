@@ -1,4 +1,6 @@
 import GProperty from "../GProperty";
+import PAction from "./Action/PAction";
+import CAction from "./Action/CAction";
 
 const {ccclass, property} = cc._decorator;
 
@@ -8,6 +10,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CProperty extends cc.Component {
     protected property:GProperty = null;
+    protected action:PAction = null;
 
     /**
      * 属性
@@ -17,6 +20,15 @@ export default class CProperty extends cc.Component {
 
         this.onData(property);
         this.onView(property);
+    }
+
+    /**
+     * 动作
+     */
+    public set Action(action:PAction){
+        this.action = action;
+        
+        this.onAction(action);
     }
 
     /**
@@ -46,5 +58,22 @@ export default class CProperty extends cc.Component {
      */
     protected onView(property:GProperty){
         
+    }
+
+        /**
+     * 动作消息
+     * @param action 动作
+     */
+    protected onAction(action:PAction){
+        let bind = action.Bind;
+        if (bind) {
+            let bindComp = <CAction>this.getComponent(bind);
+            if (!bindComp) {
+                bindComp = this.addComponent(bind);
+            }
+            if (bindComp) {
+                bindComp.Property = action;
+            }
+        }
     }
 }

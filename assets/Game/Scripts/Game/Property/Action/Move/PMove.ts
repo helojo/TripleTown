@@ -25,6 +25,7 @@ export default class PMove extends PAction {
 
     public constructor(unit:number, position:SPosition){
         super();
+        this.bind = "CMove";
         this.unit = unit;
         this.position = position;
     }
