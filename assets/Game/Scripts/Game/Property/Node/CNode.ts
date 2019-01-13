@@ -14,11 +14,15 @@ export default class CNode extends CProperty {
     protected side:number = 80;
 
     /**
-     * 设置坐标
+     * 坐标
      */
     public set Position(value:SPosition){
         this.position = value;
         this.node.position = value.toVec2(this.side);
+    }
+
+    public get Position(){
+        return this.position;
     }
 
     /**

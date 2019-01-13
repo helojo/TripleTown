@@ -4,6 +4,7 @@ import SPosition from "../../../Struct/SPosition";
 import PMove from "../../Action/Move/PMove";
 import PSpawn, { SActionPackage } from "../../Action/Spawn/PSpawn";
 import CSpawn from "../../Action/Spawn/CSpawn";
+import CInput from "../../Logic/CInput";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,6 +13,10 @@ const {ccclass, property} = cc._decorator;
  */
 @ccclass
 export default class CMap extends CLayer {
+
+    @property
+    protected moveUnit:number = 0.25;
+
 
     protected onEnable(){
         this.node.on(EInput.Click, this.onInputClick, this);
@@ -37,10 +42,13 @@ export default class CMap extends CLayer {
      * @param positionB 坐标B
      */
     protected onInputSwitch(positionA:SPosition, positionB:SPosition){
+        let input = this.getComponent(CInput);
+        input.enabled = false;
+        
         let cNodeA = this.map[positionA.X][positionA.Y];
         let cNodeB = this.map[positionB.X][positionB.Y];
-        let pMoveA = new PMove(1, positionB);
-        let pMoveB = new PMove(1, positionA);
+        let pMoveA = new PMove(this.moveUnit, positionB);
+        let pMoveB = new PMove(this.moveUnit, positionA);
         let pSpawn = new PSpawn(this.onSwitchComplete.bind(this));
         let sPackageA = new SActionPackage(cNodeA, pMoveA);
         let sPackageB = new SActionPackage(cNodeB, pMoveB);
@@ -51,5 +59,43 @@ export default class CMap extends CLayer {
 
     private onSwitchComplete(cProperty:CSpawn, pAction:PSpawn){
         cc.log("CMap.onSwitchComplete");
+        let actions = pAction.Actions;
+        cc.log("CMap.onSwitchComplete.actions", actions);
+        let sPackageA = actions[1];
+        let cNodeA = sPackageA.Node;
+        this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
+        let sPackageB = actions[2];
+        let cNodeB = sPackageB.Node;
+        this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
+        //判断是否可消除
+        let isTriple = true;
+        if (isTriple) {
+            
+        }else{
+            let pMoveA = new PMove(this.moveUnit, cNodeB.Position);
+            let pMoveB = new PMove(this.moveUnit, cNodeA.Position);
+            let pSpawn = new PSpawn(this.onResumeComplete.bind(this));
+            let sPackageA = new SActionPackage(cNodeA, pMoveA);
+            let sPackageB = new SActionPackage(cNodeB, pMoveB);
+            pSpawn.Actions.push(sPackageA, sPackageB);
+
+            let delayFunc = function(){
+                this.Action = pSpawn;
+            }
+            this.scheduleOnce(delayFunc.bind(this), 0.1);
+        }
+    }
+
+    private onResumeComplete(cProperty:CSpawn, pAction:PSpawn){
+        let actions = pAction.Actions;
+        let sPackageA = actions[1];
+        let cNodeA = sPackageA.Node;
+        this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
+        let sPackageB = actions[2];
+        let cNodeB = sPackageB.Node;
+        this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
+
+        let input = this.getComponent(CInput);
+        input.enabled = true;
     }
 }
