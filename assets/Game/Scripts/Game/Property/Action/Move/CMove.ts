@@ -22,7 +22,7 @@ export default class CMove extends CAction {
             let mag = sPosition.toVec2(1).subSelf(mPosition.toVec2(1)).mag();
             let time = unit * mag;
             let moveTo = cc.moveTo(time, mPosition.toVec2(side));
-            let callFunc = cc.callFunc(this.callback, this, cNode);
+            let callFunc = cc.callFunc(this.callback, this);
             let sequence = cc.sequence(moveTo, callFunc);
             this.node.runAction(sequence);
         }else{
@@ -30,7 +30,8 @@ export default class CMove extends CAction {
         }
     }
 
-    private callback(cNode:CNode = null){
+    private callback(){
+        let cNode = this.getComponent(CNode);
         let pMove = <PMove>this.property;
         if (cNode) {
             cNode.Position = pMove.Position;
