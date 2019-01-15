@@ -65,10 +65,11 @@ export default class CMap extends CLayer {
         let actions = pAction.Actions;
         let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
-        this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
         let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
-        this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
+        let temp = this.map[cNodeA.Position.X][cNodeA.Position.X];
+        this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
+        this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
         //判断是否可消除
         let isTriple = false;
         if (isTriple) {
@@ -93,10 +94,11 @@ export default class CMap extends CLayer {
         let actions = pAction.Actions;
         let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
-        this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
         let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
-        this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
+        let temp = this.map[cNodeA.Position.X][cNodeA.Position.X];
+        this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
+        this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
 
         let input = this.getComponent(CInput);
         input.enabled = true;
