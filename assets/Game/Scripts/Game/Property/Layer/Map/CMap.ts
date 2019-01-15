@@ -17,6 +17,9 @@ export default class CMap extends CLayer {
     @property
     protected moveUnit:number = 0.25;
 
+    @property
+    protected resumeDelay:number = 0.2;
+
 
     protected onEnable(){
         this.node.on(EInput.Click, this.onInputClick, this);
@@ -81,7 +84,7 @@ export default class CMap extends CLayer {
             let delayFunc = function(){
                 this.Action = pSpawn;
             }
-            this.scheduleOnce(delayFunc.bind(this), 0.1);
+            this.scheduleOnce(delayFunc.bind(this), this.resumeDelay);
         }
     }
 
