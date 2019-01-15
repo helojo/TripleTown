@@ -60,15 +60,14 @@ export default class CMap extends CLayer {
     private onSwitchComplete(cProperty:CSpawn, pAction:PSpawn){
         cc.log("CMap.onSwitchComplete");
         let actions = pAction.Actions;
-        cc.log("CMap.onSwitchComplete.actions", actions);
-        let sPackageA = actions[1];
+        let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
         this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
-        let sPackageB = actions[2];
+        let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
         this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
         //判断是否可消除
-        let isTriple = true;
+        let isTriple = false;
         if (isTriple) {
             
         }else{
@@ -87,11 +86,12 @@ export default class CMap extends CLayer {
     }
 
     private onResumeComplete(cProperty:CSpawn, pAction:PSpawn){
+        cc.log("CMap.onResumeComplete");
         let actions = pAction.Actions;
-        let sPackageA = actions[1];
+        let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
         this.map[cNodeA.Position.X][cNodeA.Position.X] = cNodeA;
-        let sPackageB = actions[2];
+        let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
         this.map[cNodeB.Position.X][cNodeB.Position.X] = cNodeB;
 
