@@ -5,6 +5,7 @@ import PMove from "../../Action/Move/PMove";
 import PSpawn, { SActionPackage } from "../../Action/Spawn/PSpawn";
 import CSpawn from "../../Action/Spawn/CSpawn";
 import CInput from "../../Logic/CInput";
+import STriple from "../../../Struct/Logic/STriple";
 
 const {ccclass, property} = cc._decorator;
 
@@ -60,8 +61,14 @@ export default class CMap extends CLayer {
         cc.log("CMap.onInputSwitch.", positionA.toString(), positionB.toString());
     }
 
+    /**
+     * 交换完成
+     * @param cProperty 批量组件
+     * @param pAction 批量属性
+     */
     private onSwitchComplete(cProperty:CSpawn, pAction:PSpawn){
         cc.log("CMap.onSwitchComplete");
+
         let actions = pAction.Actions;
         let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
@@ -71,10 +78,11 @@ export default class CMap extends CLayer {
         this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
         this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
         //判断是否可消除
-        let isTriple = false;
-        if (isTriple) {
+        let sTriples = this.findTriples();
+        if (sTriples.length > 0) {
             
         }else{
+            //不可消除 恢复原有位置
             let pMoveA = new PMove(this.moveUnit, cNodeB.Position);
             let pMoveB = new PMove(this.moveUnit, cNodeA.Position);
             let pSpawn = new PSpawn(this.onResumeComplete.bind(this));
@@ -89,8 +97,14 @@ export default class CMap extends CLayer {
         }
     }
 
+    /**
+     * 恢复完成
+     * @param cProperty 批量组件
+     * @param pAction 批量属性
+     */
     private onResumeComplete(cProperty:CSpawn, pAction:PSpawn){
         cc.log("CMap.onResumeComplete");
+
         let actions = pAction.Actions;
         let sPackageA = actions[0];
         let cNodeA = sPackageA.Node;
@@ -100,7 +114,25 @@ export default class CMap extends CLayer {
         this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
         this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
 
+        this.onComplete();
+    }
+
+    /**
+     * 消除完成
+     */
+    private onComplete(){
+        cc.log("CMap.onComplete");
+
         let input = this.getComponent(CInput);
         input.enabled = true;
+    }
+
+    /**
+     * 寻找三连续
+     */
+    protected findTriples(){
+        let sTriples:Array<STriple> = new Array<STriple>();
+
+        return sTriples;
     }
 }
