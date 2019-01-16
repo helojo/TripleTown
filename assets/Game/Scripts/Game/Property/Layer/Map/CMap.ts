@@ -39,7 +39,7 @@ export default class CMap extends CLayer {
      * @param position 坐标
      */
     protected onInputClick(position:SPosition){
-        cc.log("CMap.onInputClick.", position.toString());
+        // cc.log("CMap.onInputClick.", position.toString());
     }
 
     /**
@@ -61,6 +61,7 @@ export default class CMap extends CLayer {
         pSpawn.Actions.push(sPackageA, sPackageB);
         this.Action = pSpawn;
         cc.log("CMap.onInputSwitch.", positionA.toString(), positionB.toString());
+        this.dumpMap("Switch");
     }
 
     /**
@@ -79,6 +80,9 @@ export default class CMap extends CLayer {
         let temp = this.map[cNodeA.Position.X][cNodeA.Position.X];
         this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
         this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
+        
+        this.dumpMap("SwitchComplete");
+
         //判断是否可消除
         let sTriples = this.findTriples();
         if (sTriples.length > 0) {
@@ -116,6 +120,8 @@ export default class CMap extends CLayer {
         this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
         this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
 
+        this.dumpMap("ResumeComplete");
+
         this.onComplete();
     }
 
@@ -123,7 +129,7 @@ export default class CMap extends CLayer {
      * 消除完成
      */
     private onComplete(){
-        cc.log("CMap.onComplete");
+        // cc.log("CMap.onComplete");
 
         let input = this.getComponent(CInput);
         input.enabled = true;
@@ -145,7 +151,7 @@ export default class CMap extends CLayer {
         for (let x = 0; x < width; x++) {
             let lBlock = null;
             let blockArray = new Array<CBlock>();
-            for (let y = 0; y < width; y++) {
+            for (let y = 0; y < height; y++) {
                 let block = <CBlock>this.map[x][y];
                 if (block.equal(lBlock)) {
                     blockArray.push(block);
@@ -166,11 +172,11 @@ export default class CMap extends CLayer {
         for (let y = 0; y < height; y++) {
             let lBlock = null;
             let blockArray = new Array<CBlock>();
-            for (let x = 0; x < height; x++) {
+            for (let x = 0; x < width; x++) {
                 let block = <CBlock>this.map[x][y];
                 if (block.equal(lBlock)) {
                     blockArray.push(block);
-                    if (y == height-1 && blockArray.length >= 3) {
+                    if (x == width-1 && blockArray.length >= 3) {
                         array.push(blockArray);
                     }
                 }else{
@@ -183,7 +189,39 @@ export default class CMap extends CLayer {
                 }
             }
         }
+        cc.log("CMap.Find.Complete");
+        for (const cBlockArray of array) {
+            let str = "";
+            for (const cBlock of cBlockArray) {
+                str += cBlock.Position.toString();
+                str += "|";
+            }
+            cc.log("CMap.Find.", str);
+        }
 
         return sTriples;
+    }
+
+    protected dumpMap(head = ""){
+        let layer = <PMap>this.property;
+        let grid = layer.Grid;
+        let width = grid.Size.Width;
+        let height = grid.Size.Height;
+
+        head = "CMap." + head;
+
+        cc.log(head, "--------------------");
+
+        for (let y = height-1; y >= 0; y--) {
+             let str = "";
+            for (let x = 0; x < width; x++) {
+                let cBlock = <CBlock>this.map[x][y];
+                str += cBlock.toString();
+                str += "|";
+            }
+            cc.log(head, str);
+        }
+
+        cc.log(head, "--------------------");
     }
 }

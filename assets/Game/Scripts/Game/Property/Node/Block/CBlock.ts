@@ -33,4 +33,8 @@ export default class CBlock extends CNode {
         let cProperty = <PBlock>cBlock.property;
         return sProperty.equal(cProperty);
     }
+
+    public toString(){
+        return this.text.string;
+    }
 }

@@ -8,13 +8,6 @@ export default class PBlock extends PNode {
     protected text:string = null;
 
     /**
-     * 类型
-     */
-    // public get Type(){
-    //     return this.type;
-    // }
-
-    /**
      * 文字
      */
     public get Text(){
