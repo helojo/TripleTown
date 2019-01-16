@@ -55,7 +55,7 @@ export default class CLevel extends cc.Component {
         let blockGrid = new SGrid<PBlock>(width, height);
         map.Grid = blockGrid;
         const blockMap = blockGrid.Map;
-        let typeMap = this.getRandomMap(width, height, 2);
+        let typeMap = this.getRandomMap(width, height, 3);
         for (let x = 0; x < width; x++) {
             for (let y = 0; y < height; y++) {
                 let type = typeMap[x][y];
@@ -79,7 +79,7 @@ export default class CLevel extends cc.Component {
         for (let x = 0; x < width; x++) {
             let row = new Array<number>()
             for (let y = 0; y < height; y++) {
-                let type = this.getRandomInt(0, max);
+                let type = this.getRandomInt(1, max);
                 row[y] = type;
             }
             map[x] = row;
@@ -130,7 +130,8 @@ export default class CLevel extends cc.Component {
                 allNum.push(i);
             }
         }
-        let index = this.getRandomInt(1, allNum.length) - 1;
+        let index = this.getRandomInt(0, allNum.length-1);
+        // cc.log("CLevel.index", index, "aLength", allNum.length, "nLength", nums.length, "max", max);
         return allNum[index];
     }
 

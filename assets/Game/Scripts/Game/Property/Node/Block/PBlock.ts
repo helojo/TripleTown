@@ -17,7 +17,7 @@ export default class PBlock extends PNode {
     public constructor(type:number){
         super();
         this.type = type;
-        this.text = type.toString();
+        this.text = this.type.toString();
     }
 
     /**
