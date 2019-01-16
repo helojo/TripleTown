@@ -77,9 +77,9 @@ export default class CMap extends CLayer {
         let cNodeA = sPackageA.Node;
         let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
-        let temp = this.map[cNodeA.Position.X][cNodeA.Position.X];
-        this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
-        this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
+        let temp = this.map[cNodeA.Position.X][cNodeA.Position.Y];
+        this.map[cNodeA.Position.X][cNodeA.Position.Y] = this.map[cNodeB.Position.X][cNodeB.Position.Y];
+        this.map[cNodeB.Position.X][cNodeB.Position.Y] = temp;
         
         this.dumpMap("SwitchComplete");
 
@@ -116,9 +116,9 @@ export default class CMap extends CLayer {
         let cNodeA = sPackageA.Node;
         let sPackageB = actions[1];
         let cNodeB = sPackageB.Node;
-        let temp = this.map[cNodeA.Position.X][cNodeA.Position.X];
-        this.map[cNodeA.Position.X][cNodeA.Position.X] = this.map[cNodeB.Position.X][cNodeB.Position.X];
-        this.map[cNodeB.Position.X][cNodeB.Position.X] = temp;
+        let temp = this.map[cNodeA.Position.X][cNodeA.Position.Y];
+        this.map[cNodeA.Position.X][cNodeA.Position.Y] = this.map[cNodeB.Position.X][cNodeB.Position.Y];
+        this.map[cNodeB.Position.X][cNodeB.Position.Y] = temp;
 
         this.dumpMap("ResumeComplete");
 
@@ -210,7 +210,7 @@ export default class CMap extends CLayer {
 
         head = "CMap." + head;
 
-        cc.log(head, "--------------------");
+        cc.log(head, "------------------");
 
         for (let y = height-1; y >= 0; y--) {
              let str = "";
@@ -222,6 +222,6 @@ export default class CMap extends CLayer {
             cc.log(head, str);
         }
 
-        cc.log(head, "--------------------");
+        cc.log(head, "------------------");
     }
 }
