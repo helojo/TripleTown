@@ -6,6 +6,8 @@ import PSpawn, { SActionPackage } from "../../Action/Spawn/PSpawn";
 import CSpawn from "../../Action/Spawn/CSpawn";
 import CInput from "../../Logic/CInput";
 import STriple from "../../../Struct/Logic/STriple";
+import PMap from "./PMap";
+import CBlock from "../../Node/Block/CBlock";
 
 const {ccclass, property} = cc._decorator;
 
@@ -131,7 +133,56 @@ export default class CMap extends CLayer {
      * 寻找三连续
      */
     protected findTriples(){
+        let layer = <PMap>this.property;
+        let grid = layer.Grid;
+        let width = grid.Size.Width;
+        let height = grid.Size.Height;
+
         let sTriples:Array<STriple> = new Array<STriple>();
+
+        let array = new Array<Array<CBlock>>();
+        //x方向
+        for (let x = 0; x < width; x++) {
+            let lBlock = null;
+            let blockArray = new Array<CBlock>();
+            for (let y = 0; y < width; y++) {
+                let block = <CBlock>this.map[x][y];
+                if (block.equal(lBlock)) {
+                    blockArray.push(block);
+                    if (y == width-1 && blockArray.length >= 3) {
+                        array.push(blockArray);
+                    }
+                }else{
+                    lBlock = block;
+                    if (blockArray.length >= 3) {
+                        array.push(blockArray);
+                    }
+                    blockArray = new Array<CBlock>();
+                    blockArray.push(block);
+                }
+            }
+        }
+        //y方向
+        for (let y = 0; y < height; y++) {
+            let lBlock = null;
+            let blockArray = new Array<CBlock>();
+            for (let x = 0; x < height; x++) {
+                let block = <CBlock>this.map[x][y];
+                if (block.equal(lBlock)) {
+                    blockArray.push(block);
+                    if (y == height-1 && blockArray.length >= 3) {
+                        array.push(blockArray);
+                    }
+                }else{
+                    lBlock = block;
+                    if (blockArray.length >= 3) {
+                        array.push(blockArray);
+                    }
+                    blockArray = new Array<CBlock>();
+                    blockArray.push(block);
+                }
+            }
+        }
 
         return sTriples;
     }

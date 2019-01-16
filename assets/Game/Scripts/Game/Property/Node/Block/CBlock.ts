@@ -15,19 +15,22 @@ export default class CBlock extends CNode {
     @property(cc.Node)
     protected rect:cc.Node = null;
 
-    @property([cc.Color])
-    protected colors:cc.Color[] = [];
-
     protected onView(property:PBlock){
         super.onView(property);
         
         this.text.string = property.Text;
+    }
 
-        let color = this.colors[property.Type];
-
-        if (color) {
-            this.rect.color = color;
+    /**
+     * 判断类型相等
+     * @param cBlock 方块
+     */
+    public equal(cBlock:CBlock){
+        if (!cBlock) {
+            return false;
         }
-
+        let sProperty = <PBlock>this.property;
+        let cProperty = <PBlock>cBlock.property;
+        return sProperty.equal(cProperty);
     }
 }

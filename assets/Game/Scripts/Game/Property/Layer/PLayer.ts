@@ -1,7 +1,7 @@
 import GProperty from "../../GProperty";
 import { EHierarchy } from "../../GEnum";
-import PTile from "../Node/Tile/PTile";
 import SGrid from "../../Struct/SGrid";
+import PNode from "../Node/PNode";
 
 
 /**
@@ -14,7 +14,7 @@ export default class PLayer extends GProperty {
     /**
      * 格子
      */
-    public Grid:SGrid<PTile> = null;
+    public Grid:SGrid<PNode> = null;
 
     /**
      * 层级

@@ -10,9 +10,9 @@ export default class PBlock extends PNode {
     /**
      * 类型
      */
-    public get Type(){
-        return this.type;
-    }
+    // public get Type(){
+    //     return this.type;
+    // }
 
     /**
      * 文字
@@ -25,5 +25,13 @@ export default class PBlock extends PNode {
         super();
         this.type = type;
         this.text = type.toString();
+    }
+
+    /**
+     * 判断类型
+     * @param pBlock 方块
+     */
+    public equal(pBlock:PBlock){
+        return pBlock && this.type == pBlock.type;
     }
 }
