@@ -210,18 +210,20 @@ export default class CMap extends CLayer {
 
         head = "CMap." + head;
 
-        cc.log(head, "------------------");
+        cc.log(head, "-----------------");
 
         for (let y = height-1; y >= 0; y--) {
              let str = "";
             for (let x = 0; x < width; x++) {
                 let cBlock = <CBlock>this.map[x][y];
                 str += cBlock.toString();
-                str += "|";
+                if (x < width-1) {
+                    str += "|";
+                }
             }
             cc.log(head, str);
         }
 
-        cc.log(head, "------------------");
+        cc.log(head, "-----------------");
     }
 }
