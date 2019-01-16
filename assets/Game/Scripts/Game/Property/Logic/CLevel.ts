@@ -55,7 +55,7 @@ export default class CLevel extends cc.Component {
         let blockGrid = new SGrid<PBlock>(width, height);
         map.Grid = blockGrid;
         const blockMap = blockGrid.Map;
-        let typeMap = this.getRandomMap(width, height, 5);
+        let typeMap = this.getRandomMap(width, height, 2);
         for (let x = 0; x < width; x++) {
             for (let y = 0; y < height; y++) {
                 let type = typeMap[x][y];
