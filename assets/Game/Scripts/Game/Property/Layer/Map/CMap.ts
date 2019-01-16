@@ -199,6 +199,60 @@ export default class CMap extends CLayer {
             cc.log("CMap.Find.", str);
         }
 
+        //拼接xy
+        for (let i = 0; i < array.length; i++) {
+            const cBlockArray = array[i];
+            if (!cBlockArray) {
+                continue;
+            }
+            for (let j = i+1; j < array.length; j++) {
+                const oBlockArray = array[j];
+                if (!oBlockArray) {
+                    continue;
+                }
+                //判断是否有相同
+                let isMerge = false;
+                for (const cBlock of cBlockArray) {
+                    for (const oBlock of oBlockArray) {
+                        if (cBlock === oBlock) {
+                            isMerge = true;
+                            //有相同则合并
+                            for (const cBlock of oBlockArray) {
+                                if (cBlock !== oBlock) {
+                                    cBlockArray.push(cBlock);
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    if (isMerge) {
+                        break;
+                    }
+                }
+                if (isMerge) {
+                    //合并完清空
+                    array[j] = null;
+                }
+            }
+        }
+
+        for (const cBlockArray of array) {
+            if (!cBlockArray) {
+                continue;
+            }
+            let str = "";
+            for (const cBlock of cBlockArray) {
+                str += cBlock.Position.toString();
+                str += "|";
+            }
+            cc.log("CMap.Find.Merge.", str);
+        }
+
+        for (const cBlockArray of array) {
+            let sTriple = new STriple(cBlockArray);
+            sTriples.push(sTriple);
+        }
+
         return sTriples;
     }
 
